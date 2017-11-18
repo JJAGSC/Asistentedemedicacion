@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Asistente de medicación</string>
+    <!--login_main -->
+    <string name="nombre">Nombre</string>
+
+    <string name="error_campo_obligatorio">Campo obligatorio</string>
+    <string name="error_edad">¡Edad incorrecta! (Valor entre 1 y 110)</string>
+    <string name="error_codigo_postal">¡CP incorrecto! (Valor entre 1 y 10)</string>
+
+    <string name="title_activity_menu">Menú principal</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="title_activity_alarm_diary">Alarmas programadas</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- menu appbar -->
+    <string name="action_settings">Configuración</string>
+    <string name="action_help">Ayuda</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_help_alarm_diary">HelpAlarmDiaryActivity</string>
+    <string name="title_activity_register_n">RegisterActivityN</string>
+    <string name="title_activity_bdmeds">BDMeds</string>
+
+    <string name="sin_datos">Sin datos.</string>
+    <string name="progress_cargando_datos">Cargando datos&#8230;</string>
+
+    <string name="medicamento_nombre">Nombre</string>
+    <string name="medicamento_formato">Formato</string>
+
+</resources>
