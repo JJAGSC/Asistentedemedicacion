@@ -1,5 +1,7 @@
 package com.medicacion.juanjose.asistentedemedicacion.pojos;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Juanjo on 04/11/2017.
  */
@@ -8,6 +10,7 @@ public class Medicamento {
     private int ID;
     String nombre;
     String formato;
+    private Bitmap imagen;
 
     public Medicamento() {
     }
@@ -17,10 +20,11 @@ public class Medicamento {
         this.formato = formato;
     }
 
-    public Medicamento(int ID, String nombre, String formato) {
+    public Medicamento(int ID, String nombre, String formato, Bitmap imagen) {
         this.ID = ID;
         this.nombre = nombre;
         this.formato = formato;
+        this.imagen = imagen;
     }
 
     public int getID() {
@@ -45,5 +49,13 @@ public class Medicamento {
 
     public void setFormato(String formato) {
         this.formato = formato;
+    }
+
+    public Bitmap getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Bitmap imagen) {
+        this.imagen = imagen;
     }
 }

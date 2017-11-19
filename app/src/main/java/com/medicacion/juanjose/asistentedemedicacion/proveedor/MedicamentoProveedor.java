@@ -2,24 +2,41 @@ package com.medicacion.juanjose.asistentedemedicacion.proveedor;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.widget.Toast;
 
+import com.medicacion.juanjose.asistentedemedicacion.constantes.Utilidades;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
+
+import java.io.IOException;
 
 /**
  * Created by Juanjo on 05/11/2017.
  */
 
 public class MedicamentoProveedor {
-    public static void insertRecord(ContentResolver resolver, Medicamento medicamento){
+    public static void insertRecord(ContentResolver resolver, Medicamento medicamento, Context contexto){
         Uri uri = Contrato.Medicamento.CONTENT_URI;
 
         ContentValues values = new ContentValues();
         values.put(Contrato.Medicamento.NOMBRE, medicamento.getNombre());
         values.put(Contrato.Medicamento.FORMATO, medicamento.getFormato());
 
-        resolver.insert(uri, values);
+        Uri uriResultado = resolver.insert(uri, values);
+
+        String medId = uriResultado.getLastPathSegment();
+
+        // content://autoridad/Medicamento/4
+
+        if (medicamento.getImagen()!=null){
+            try {
+                Utilidades.storeImage(medicamento.getImagen(), contexto, "img_" + medId + ".jpg");
+            } catch (IOException e) {
+                Toast.makeText(contexto, "Ha ocurrido un error al guardar la imagen", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     public static void deleteRecord(ContentResolver resolver, int medicamentoID){
@@ -27,7 +44,7 @@ public class MedicamentoProveedor {
         resolver.delete(uri, null, null);
     }
 
-    public static void updateRecord(ContentResolver resolver, Medicamento medicamento){
+    public static void updateRecord(ContentResolver resolver, Medicamento medicamento, Context contexto){
         Uri uri = Uri.parse(Contrato.Medicamento.CONTENT_URI + "/" + medicamento.getID());
 
         ContentValues values = new ContentValues();
@@ -35,6 +52,14 @@ public class MedicamentoProveedor {
         values.put(Contrato.Medicamento.FORMATO, medicamento.getFormato());
 
         resolver.update (uri, values, null, null);
+
+        if (medicamento.getImagen()!=null){
+            try {
+                Utilidades.storeImage(medicamento.getImagen(), contexto, "img_" + medicamento.getID() + ".jpg");
+            } catch (IOException e) {
+                Toast.makeText(contexto, "Ha ocurrido un error al guardar la imagen", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     public static Medicamento readRecord(ContentResolver resolver, int medicamentoID){

@@ -26,8 +26,11 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.medicacion.juanjose.asistentedemedicacion.R;
 import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
+import com.medicacion.juanjose.asistentedemedicacion.constantes.Utilidades;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.Contrato;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
+
+import java.io.FileNotFoundException;
 
 public class MedicamentoListFragment extends ListFragment
 		implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -213,13 +216,17 @@ public class MedicamentoListFragment extends ListFragment
 			TextView textviewFormato = (TextView) view.findViewById(R.id.textview_medicamento_list_item_formato);
 			textviewFormato.setText(formato);
 
-			ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
-			int color = generator.getColor(formato); //Genera un color según el nombre
-			TextDrawable drawable = TextDrawable.builder()
-					.buildRound(nombre.substring(0,1), color);
-
 			ImageView image = (ImageView) view.findViewById(R.id.image_view);
-			image.setImageDrawable(drawable);
+
+			try {
+				Utilidades.loadImageFromStorage(getActivity(), "img_" + ID + ".jpg", image);
+			} catch (FileNotFoundException e) {
+				ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
+				int color = generator.getColor(formato); //Genera un color según el nombre
+				TextDrawable drawable = TextDrawable.builder()
+						.buildRound(nombre.substring(0,1), color);
+				image.setImageDrawable(drawable);
+			}
 
 			view.setTag(ID);
 

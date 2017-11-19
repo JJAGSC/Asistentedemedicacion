@@ -67,6 +67,7 @@
             android:layout_height="match_parent"
             android:id="@+id/imgAddMed"
             android:src="@drawable/ic_add_a_photo_black_24dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="9"/>
 
         <LinearLayout
@@ -79,12 +80,14 @@
             <ImageButton
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/ic_photo_camera_black_24dp"/>
+                android:src="@drawable/ic_photo_camera_black_24dp"
+                android:id="@+id/imageButtonCamera"/>
 
             <ImageButton
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/ic_search_black_24dp"/>
+                android:src="@drawable/ic_photo_library_black_24dp"
+                android:id="@+id/imageButtonGallery"/>
 
         </LinearLayout>
 
