@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.medicacion.juanjose.asistentedemedicacion.ManagePicturesActivity"
+    tools:showIn="@layout/activity_manage_pictures"
+    android:weightSum="1">
+
+    <Button
+        android:id="@+id/btnBD"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="37dp"
+        android:text="Ir a la Base de Datos" />
+
+    <Button
+        android:id="@+id/btnMakePicture"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnBD"
+        android:layout_alignStart="@+id/btnBD"
+        android:layout_below="@+id/btnBD"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="Hacer foto" />
+
+    <Button
+        android:id="@+id/btnGallery"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignLeft="@+id/btnMakePicture"
+        android:layout_alignStart="@+id/btnMakePicture"
+        android:layout_below="@+id/btnMakePicture"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="Elegir de la galería" />
+
+    <ImageView
+        android:id="@+id/imgCamera"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.43"
+        android:src="@drawable/ic_add_a_photo_black_24dp"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/btnGallery"
+        android:layout_alignLeft="@+id/btnGallery"
+        android:layout_alignStart="@+id/btnGallery" />
+
+
+</RelativeLayout>

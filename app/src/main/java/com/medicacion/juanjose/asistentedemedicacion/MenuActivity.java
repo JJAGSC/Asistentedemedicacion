@@ -2,8 +2,6 @@ package com.medicacion.juanjose.asistentedemedicacion;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -48,7 +46,7 @@ public class MenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         final Button addMed = (Button) findViewById(R.id.addMed);
-        Button medProspect = (Button) findViewById(R.id.prospecto);
+        Button managePictures = (Button) findViewById(R.id.gestionarFotos);
         Button buttonClinic = (Button) findViewById(R.id.centroSalud);
         Button buttonBDMeds = (Button) findViewById(R.id.btnBDMeds);
 
@@ -61,10 +59,10 @@ public class MenuActivity extends AppCompatActivity
             }
         });
 
-        medProspect.setOnClickListener(new View.OnClickListener() {
+        managePictures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (getApplicationContext(), MedProspect.class);
+                Intent intent = new Intent (getApplicationContext(), ManagePicturesActivity.class);
                 startActivity(intent);
             }
         });

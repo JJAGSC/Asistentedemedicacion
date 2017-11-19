@@ -144,7 +144,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuActivity" />
         </activity>
-
+        <activity
+            android:name=".ManagePicturesActivity"
+            android:label="@string/title_activity_manage_pictures"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.medicacion.juanjose.asistentedemedicacion.MenuActivity" />
+        </activity>
     </application>
 
 </manifest>

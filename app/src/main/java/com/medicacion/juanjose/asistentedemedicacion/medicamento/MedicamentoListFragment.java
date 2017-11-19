@@ -31,8 +31,6 @@ import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProvee
 
 public class MedicamentoListFragment extends ListFragment
 		implements LoaderManager.LoaderCallbacks<Cursor> {
-	
-	//private static final String LOGTAG = "Tiburcio - MedicamentoListFragment";
 
 	MedicamentoCursorAdapter mAdapter;
 	LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
