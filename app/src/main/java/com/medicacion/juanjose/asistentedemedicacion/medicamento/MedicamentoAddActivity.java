@@ -150,7 +150,7 @@ public class MedicamentoAddActivity extends AppCompatActivity {
 
         Medicamento medicamento = new Medicamento(G.SIN_VALOR_INT, nombre, formato, foto);
 
-        MedicamentoProveedor.insertRecord(getContentResolver(), medicamento, this);
+        MedicamentoProveedor.insertRecordConBitacora(getContentResolver(), medicamento, this);
         finish();
     }
 }

@@ -167,7 +167,7 @@ public class MedicamentoModificarActivity extends AppCompatActivity {
 
         Medicamento medicamento = new Medicamento(medID, nombre, formato, foto);
 
-        MedicamentoProveedor.updateRecord(getContentResolver(), medicamento, this);
+        MedicamentoProveedor.updateRecordConBitacora(getContentResolver(), medicamento, this);
         finish();
     }
 }

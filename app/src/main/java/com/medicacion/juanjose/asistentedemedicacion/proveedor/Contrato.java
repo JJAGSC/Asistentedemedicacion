@@ -16,4 +16,14 @@ public class Contrato {
         public static final String NOMBRE = "Nombre";
         public static final String FORMATO = "Formato";
     }
+
+    public static final class Bitacora implements BaseColumns {
+
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://"+AUTHORITY+"/Bitacora");
+
+        // Table column
+        public static final String ID_MEDICAMENTO = "ID_Medicamento";
+        public static final String OPERACION = "Operacion";
+    }
 }

@@ -142,7 +142,7 @@ public class MedicamentoListFragment extends ListFragment
 			switch (item.getItemId()){
 				case R.id.menu_borrar:
 					int medicamentoID = (Integer) viewSeleccionado.getTag();
-					MedicamentoProveedor.deleteRecord(getActivity().getContentResolver(), medicamentoID);
+					MedicamentoProveedor.deleteRecordConBitacora(getActivity().getContentResolver(), medicamentoID);
 					break;
 				case R.id.menu_editar:
 					Intent intent = new Intent(getActivity(), MedicamentoModificarActivity.class);

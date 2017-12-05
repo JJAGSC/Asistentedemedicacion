@@ -7,7 +7,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.widget.Toast;
 
+import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
 import com.medicacion.juanjose.asistentedemedicacion.constantes.Utilidades;
+import com.medicacion.juanjose.asistentedemedicacion.pojos.Bitacora;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
 
 import java.io.IOException;
@@ -17,7 +19,9 @@ import java.io.IOException;
  */
 
 public class MedicamentoProveedor {
-    public static void insertRecord(ContentResolver resolver, Medicamento medicamento, Context contexto){
+
+    // No hemos desactivado el contexto para que funcionen las imagenes
+    public static Uri insertRecord(ContentResolver resolver, Medicamento medicamento, Context contexto){
         Uri uri = Contrato.Medicamento.CONTENT_URI;
 
         ContentValues values = new ContentValues();
@@ -37,11 +41,39 @@ public class MedicamentoProveedor {
                 Toast.makeText(contexto, "Ha ocurrido un error al guardar la imagen", Toast.LENGTH_LONG).show();
             }
         }
+
+        return uriResultado;
+    }
+
+    // No hemos desactivado el contexto por ahora
+    public static void insertRecordConBitacora(ContentResolver resolver, Medicamento medicamento, Context contexto){
+
+        // Ojo, el contexto se ha dejado solo para las fotos
+        Uri uri = insertRecord(resolver, medicamento, contexto);
+        medicamento.setID(Integer.parseInt(uri.getLastPathSegment()));
+
+        Bitacora bitacora = new Bitacora();
+        bitacora.setID_Medicamento(medicamento.getID());
+        bitacora.setOperacion(G.OPERACION_INSERTAR);
+
+        BitacoraProveedor.insertRecord(resolver, bitacora, contexto);
     }
 
     public static void deleteRecord(ContentResolver resolver, int medicamentoID){
         Uri uri = Uri.parse(Contrato.Medicamento.CONTENT_URI + "/" + medicamentoID);
         resolver.delete(uri, null, null);
+    }
+
+    public static void deleteRecordConBitacora(ContentResolver resolver, int medicamentoID){
+
+        deleteRecord(resolver, medicamentoID);
+
+        Bitacora bitacora = new Bitacora();
+        bitacora.setID_Medicamento(medicamentoID);
+        bitacora.setOperacion(G.OPERACION_BORRAR);
+
+        // Ojo, se ha puesto el contexto en null ya que delete no recibe contexto
+        BitacoraProveedor.insertRecord(resolver, bitacora, null);
     }
 
     public static void updateRecord(ContentResolver resolver, Medicamento medicamento, Context contexto){
@@ -60,6 +92,18 @@ public class MedicamentoProveedor {
                 Toast.makeText(contexto, "Ha ocurrido un error al guardar la imagen", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public static void updateRecordConBitacora(ContentResolver resolver, Medicamento medicamento, Context contexto){
+
+        // Ojo, el contexto se ha dejado solo para las fotos
+        updateRecord(resolver, medicamento, contexto);
+
+        Bitacora bitacora = new Bitacora();
+        bitacora.setID_Medicamento(medicamento.getID());
+        bitacora.setOperacion(G.OPERACION_MODIFICAR);
+
+        BitacoraProveedor.insertRecord(resolver, bitacora, contexto);
     }
 
     public static Medicamento readRecord(ContentResolver resolver, int medicamentoID){

@@ -22,12 +22,16 @@ public class ProveedorDeContenido extends ContentProvider {
     // content://com.medicacion.juanjose.asistentedemedicacion.proveedor.ProveedorDeContenido/Medicamento
     private static final int MEDICAMENTO_ALL_REGS = 2;
 
+    private static final int BITACORA_ONE_REG = 3;
+    private static final int BITACORA_ALL_REGS = 4;
+
     private SQLiteDatabase sqlDB;
     public DatabaseHelper dbHelper;
     private static final String DATABASE_NAME = "Medicamentos.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String MEDICAMENTO_TABLE_NAME = "Medicamento";
+    private static final String BITACORA_TABLE_NAME = "Bitacora";
 
     // Indicates an invalid content URI
     public static final int INVALID_URI = -1;
@@ -66,6 +70,15 @@ public class ProveedorDeContenido extends ContentProvider {
                 MEDICAMENTO_TABLE_NAME + "/#",
                 MEDICAMENTO_ONE_REG);
 
+        sUriMatcher.addURI(
+                Contrato.AUTHORITY,
+                BITACORA_TABLE_NAME,
+                BITACORA_ALL_REGS);
+        sUriMatcher.addURI(
+                Contrato.AUTHORITY,
+                BITACORA_TABLE_NAME + "/#",
+                BITACORA_ONE_REG);
+
         // Specifies a custom MIME type for the picture URL table
 
         sMimeTypes.put(
@@ -76,6 +89,15 @@ public class ProveedorDeContenido extends ContentProvider {
                 MEDICAMENTO_ONE_REG,
                 "vnd.android.cursor.item/vnd."+
                         Contrato.AUTHORITY + "." + MEDICAMENTO_TABLE_NAME);
+
+        sMimeTypes.put(
+                BITACORA_ALL_REGS,
+                "vnd.android.cursor.dir/vnd." +
+                        Contrato.AUTHORITY + "." + BITACORA_TABLE_NAME);
+        sMimeTypes.put(
+                BITACORA_ONE_REG,
+                "vnd.android.cursor.item/vnd."+
+                        Contrato.AUTHORITY + "." + BITACORA_TABLE_NAME);
     }
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
@@ -90,8 +112,14 @@ public class ProveedorDeContenido extends ContentProvider {
 
             //if (!db.isReadOnly()){
             //Habilitamos la integridad referencial
-            db.execSQL("PRAGMA foreign_keys=ON;");
+            //db.execSQL("PRAGMA foreign_keys=ON;");
             //}
+        }
+
+        // Añadimos esto para resolver el problema de la integridad referencial ya que a partir de la API 16 el método ha cambiado
+        @Override
+        public void onConfigure(SQLiteDatabase db){
+            db.setForeignKeyConstraintsEnabled(true);
         }
 
         @Override
@@ -105,10 +133,19 @@ public class ProveedorDeContenido extends ContentProvider {
                             + Contrato.Medicamento.FORMATO + " TEXT ); "
             );
 
-            inicializarDatos(db);
+            db.execSQL("Create table "
+                    + BITACORA_TABLE_NAME
+                    + "( _id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, "
+                    + Contrato.Bitacora.ID_MEDICAMENTO + " INTEGER , "
+                    + Contrato.Bitacora.OPERACION + " INTEGER ); "
+            );
+
+            // Se ha comentado la línea que inicializa los datos, para no tener que crear su bitácora, se puede reactivar en un futuro
+            //inicializarDatos(db);
 
         }
 
+        // Se ha comentado la línea que inicializa los datos, para no tener que crear su bitácora, hacer en un futuro
         void inicializarDatos(SQLiteDatabase db){
 
             db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.FORMATO + ") " +
@@ -124,6 +161,7 @@ public class ProveedorDeContenido extends ContentProvider {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			db.execSQL("DROP TABLE IF EXISTS " + MEDICAMENTO_TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + BITACORA_TABLE_NAME);
 
             onCreate(db);
         }
@@ -159,6 +197,9 @@ public class ProveedorDeContenido extends ContentProvider {
             case MEDICAMENTO_ALL_REGS:
                 table = MEDICAMENTO_TABLE_NAME;
                 break;
+            case BITACORA_ALL_REGS:
+                table = BITACORA_TABLE_NAME;
+                break;
         }
 
         long rowId = sqlDB.insert(table, "", values);
@@ -189,6 +230,15 @@ public class ProveedorDeContenido extends ContentProvider {
             case MEDICAMENTO_ALL_REGS:
                 table = MEDICAMENTO_TABLE_NAME;
                 break;
+            case BITACORA_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contrato.Bitacora._ID + " = "
+                        + uri.getLastPathSegment();
+                table = BITACORA_TABLE_NAME;
+                break;
+            case BITACORA_ALL_REGS:
+                table = BITACORA_TABLE_NAME;
+                break;
         }
         int rows = sqlDB.delete(table, selection, selectionArgs);
         if (rows > 0) {
@@ -218,12 +268,23 @@ public class ProveedorDeContenido extends ContentProvider {
                         Contrato.Medicamento._ID + " ASC";
                 qb.setTables(MEDICAMENTO_TABLE_NAME);
                 break;
+            case BITACORA_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contrato.Bitacora._ID + " = "
+                        + uri.getLastPathSegment();
+                qb.setTables(BITACORA_TABLE_NAME);
+                break;
+            case BITACORA_ALL_REGS:
+                if (TextUtils.isEmpty(sortOrder)) sortOrder =
+                        Contrato.Bitacora._ID + " ASC";
+                qb.setTables(BITACORA_TABLE_NAME);
+                break;
         }
 
         Cursor c;
         c = qb.query(db, projection, selection, selectionArgs, null, null,
                         sortOrder);
-        c.setNotificationUri(getContext().getContentResolver(), uri);
+        //c.setNotificationUri(getContext().getContentResolver(), uri);
 
         return c;
     }
@@ -244,6 +305,15 @@ public class ProveedorDeContenido extends ContentProvider {
                 break;
             case MEDICAMENTO_ALL_REGS:
                 table = MEDICAMENTO_TABLE_NAME;
+                break;
+            case BITACORA_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contrato.Bitacora._ID + " = "
+                        + uri.getLastPathSegment();
+                table = BITACORA_TABLE_NAME;
+                break;
+            case BITACORA_ALL_REGS:
+                table = BITACORA_TABLE_NAME;
                 break;
         }
 
