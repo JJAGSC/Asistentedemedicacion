@@ -2,6 +2,7 @@ package com.medicacion.juanjose.asistentedemedicacion;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
+import com.medicacion.juanjose.asistentedemedicacion.medicamento.MedicamentoAddActivity;
 import com.medicacion.juanjose.asistentedemedicacion.medicamento.MedicamentoListFragment;
 
 public class AlarmDiaryActivity extends AppCompatActivity {
@@ -69,6 +72,7 @@ public class AlarmDiaryActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
     }
 
 
@@ -178,7 +182,6 @@ public class AlarmDiaryActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-
                     MedicamentoListFragment medicamentoListFragment = new MedicamentoListFragment();
                     return medicamentoListFragment;
                 case 1:
