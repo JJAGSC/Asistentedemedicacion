@@ -112,6 +112,7 @@ public class AlarmDiaryActivity extends AppCompatActivity {
         public PlaceholderFragment() {
         }
 
+
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -138,22 +139,22 @@ public class AlarmDiaryActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_alarm_diary, container, false);
             TextView textMessage = (TextView) rootView.findViewById(R.id.section_label);
-            //textMessage.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textMessage.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 
+            /**
             positionTab = getArguments().getInt(ARG_SECTION_NUMBER);
 
             switch (positionTab){
                 case 1:
-                    textMessage.setText("Aquí se incluirán las alarmas creadas por el usuario.");
-                    break;
-                case 2:
-                    textMessage.setText("Aquí se mostrará un calendario de los medicamentos que ha de tomar y las horas.");
-                    break;
-                case 3:
                     textMessage.setText("Aquí se verá una lista de los medicamentos que toma el usuario.");
                     break;
-            }
-
+                case 2:
+                    textMessage.setText("Aquí se incluirán las alarmas creadas por el usuario.");
+                    break;
+                case 3:
+                    textMessage.setText("Aquí se mostrará un calendario de los medicamentos que ha de tomar y las horas.");
+                    break;
+            }*/
 
             return rootView;
         }
@@ -173,7 +174,20 @@ public class AlarmDiaryActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            //return PlaceholderFragment.newInstance(position + 1);
+
+            switch (position) {
+                case 0:
+                    MedicamentosFragment medicamentosFragment = new MedicamentosFragment();
+                    return medicamentosFragment;
+                case 1:
+                    AlarmasFragment alarmasFragment = new AlarmasFragment();
+                    return alarmasFragment;
+                case 2:
+                    CalendarioFragment calendarioFragment = new CalendarioFragment();
+                    return calendarioFragment;
+            }
+            return null;
         }
 
         @Override
@@ -186,11 +200,11 @@ public class AlarmDiaryActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Alarmas";
+                    return "Medicamentos";
                 case 1:
-                    return "Calendario";
+                    return "Alarmas";
                 case 2:
-                    return "Medicamento";
+                    return "Calendario";
             }
             return null;
         }

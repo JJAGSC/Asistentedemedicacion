@@ -8,6 +8,17 @@
     tools:context="com.medicacion.juanjose.asistentedemedicacion.MenuActivity"
     tools:showIn="@layout/app_bar_menu">
 
+    <Button
+        android:id="@+id/addMed"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="260dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:text="Añadir medicación y hora"
+        android:textAllCaps="false"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnBDMeds"
@@ -16,14 +27,10 @@
         android:layout_alignLeft="@+id/gestionarFotos"
         android:layout_alignStart="@+id/gestionarFotos"
         android:layout_below="@+id/gestionarFotos"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="25dp"
         android:text="Base de datos de medicamentos"
         android:textAllCaps="false"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.747" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/centroSalud"
@@ -32,46 +39,33 @@
         android:layout_alignLeft="@+id/btnBDMeds"
         android:layout_alignStart="@+id/btnBDMeds"
         android:layout_below="@+id/btnBDMeds"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="25dp"
         android:text="Buscar centro de salud más cercano"
         android:textAllCaps="false"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.747" />
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/gestionarAlarmas"
+        android:layout_width="260dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/addMed"
+        android:layout_alignStart="@+id/addMed"
+        android:layout_below="@+id/addMed"
+        android:layout_marginTop="25dp"
+        android:text="Gestionar alarmas"
+        android:textAllCaps="false"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/gestionarFotos"
         android:layout_width="260dp"
         android:layout_height="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_alignLeft="@+id/gestionarAlarmas"
+        android:layout_alignStart="@+id/gestionarAlarmas"
+        android:layout_below="@+id/gestionarAlarmas"
+        android:layout_marginTop="25dp"
         android:text="Gestionar fotos"
         android:textAllCaps="false"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/centroSalud"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.807"
-        android:layout_below="@+id/addMed"
-        android:layout_alignLeft="@+id/addMed"
-        android:layout_alignStart="@+id/addMed" />
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/addMed"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="260dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp"
-        android:text="Añadir medicación y hora"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/gestionarFotos"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496" />
 </RelativeLayout>

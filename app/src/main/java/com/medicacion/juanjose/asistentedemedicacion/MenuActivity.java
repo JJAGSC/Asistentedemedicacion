@@ -45,7 +45,8 @@ public class MenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final Button addMed = (Button) findViewById(R.id.addMed);
+        Button addMed = (Button) findViewById(R.id.addMed);
+        Button manageAlarms = (Button) findViewById(R.id.gestionarAlarmas);
         Button managePictures = (Button) findViewById(R.id.gestionarFotos);
         Button buttonClinic = (Button) findViewById(R.id.centroSalud);
         Button buttonBDMeds = (Button) findViewById(R.id.btnBDMeds);
@@ -56,6 +57,14 @@ public class MenuActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),AddAlarm.class);
                 startActivity(intent);
+            }
+        });
+
+        manageAlarms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openAlarms = new Intent(getApplicationContext(), AlarmDiaryActivity.class);
+                startActivity(openAlarms);
             }
         });
 
