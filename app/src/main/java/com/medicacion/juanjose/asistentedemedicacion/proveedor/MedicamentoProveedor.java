@@ -13,6 +13,7 @@ import com.medicacion.juanjose.asistentedemedicacion.pojos.Bitacora;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Juanjo on 05/11/2017.
@@ -127,5 +128,32 @@ public class MedicamentoProveedor {
         }
 
         return null;
+    }
+
+    public static ArrayList<Medicamento> readAllRecord(ContentResolver resolver){
+        Uri uri = Contrato.Medicamento.CONTENT_URI;
+
+        String[] projection = {
+                Contrato.Medicamento._ID,
+                Contrato.Medicamento.NOMBRE,
+                Contrato.Medicamento.FORMATO
+        };
+
+        Cursor cursor = resolver.query (uri, projection, null, null, null);
+
+        ArrayList<Medicamento> medicamentos = new ArrayList<>();
+        Medicamento medicamento;
+
+        while (cursor.moveToNext()){
+            medicamento = new Medicamento();
+
+            medicamento.setID(cursor.getInt(cursor.getColumnIndex(Contrato.Medicamento._ID)));
+            medicamento.setNombre(cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.NOMBRE)));
+            medicamento.setFormato(cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.FORMATO)));
+
+            medicamentos.add(medicamento);
+        }
+
+        return medicamentos;
     }
 }

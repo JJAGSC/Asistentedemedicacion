@@ -20,6 +20,12 @@ public class Medicamento {
         this.formato = formato;
     }
 
+    public Medicamento(int ID, String nombre, String formato) {
+        this.ID = ID;
+        this.nombre = nombre;
+        this.formato = formato;
+    }
+
     public Medicamento(int ID, String nombre, String formato, Bitmap imagen) {
         this.ID = ID;
         this.nombre = nombre;

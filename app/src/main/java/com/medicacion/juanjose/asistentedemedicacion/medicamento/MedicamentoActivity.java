@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.medicacion.juanjose.asistentedemedicacion.R;
+import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
 
 public class MedicamentoActivity extends AppCompatActivity {
 
@@ -29,14 +30,17 @@ public class MedicamentoActivity extends AppCompatActivity {
         transaction.add(R.id.fragment_medicamento, medicamentoListFragment);
         transaction.commit();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MedicamentoAddActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (G.VERSION_ADMINISTRADOR) {
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setVisibility(View.VISIBLE);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), MedicamentoAddActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
 

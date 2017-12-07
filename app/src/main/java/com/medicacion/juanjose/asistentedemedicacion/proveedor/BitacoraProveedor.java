@@ -13,6 +13,7 @@ import com.medicacion.juanjose.asistentedemedicacion.pojos.Bitacora;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Bitacora;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Juanjo on 05/11/2017.
@@ -89,5 +90,32 @@ public class BitacoraProveedor {
         }
 
         return null;
+    }
+
+    public static ArrayList<Bitacora> readAllRecord(ContentResolver resolver){
+        Uri uri = Contrato.Bitacora.CONTENT_URI;
+
+        String[] projection = {
+                Contrato.Bitacora._ID,
+                Contrato.Bitacora.ID_MEDICAMENTO,
+                Contrato.Bitacora.OPERACION
+        };
+
+        Cursor cursor = resolver.query (uri, projection, null, null, null);
+
+        ArrayList<Bitacora> bitacoras = new ArrayList<>();
+        Bitacora bitacora;
+
+        while (cursor.moveToNext()){
+            bitacora = new Bitacora();
+
+            bitacora.setID(cursor.getInt(cursor.getColumnIndex(Contrato.Bitacora._ID)));
+            bitacora.setID_Medicamento(cursor.getInt(cursor.getColumnIndex(Contrato.Bitacora.ID_MEDICAMENTO)));
+            bitacora.setOperacion(cursor.getInt(cursor.getColumnIndex(Contrato.Bitacora.OPERACION)));
+
+            bitacoras.add(bitacora);
+        }
+
+        return bitacoras;
     }
 }

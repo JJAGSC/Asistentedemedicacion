@@ -61,10 +61,12 @@ public class MedicamentoListFragment extends ListFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        MenuItem menuItem = menu.add(Menu.NONE, G.INSERTAR, Menu.NONE, "Insertar");
-        menuItem.setIcon(R.drawable.ic_nuevo_registro);
-        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        super.onCreateOptionsMenu(menu, inflater);
+        if (G.VERSION_ADMINISTRADOR) {
+            MenuItem menuItem = menu.add(Menu.NONE, G.INSERTAR, Menu.NONE, "Insertar");
+            menuItem.setIcon(R.drawable.ic_nuevo_registro);
+            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            super.onCreateOptionsMenu(menu, inflater);
+        }
     }
 
     @Override
@@ -105,22 +107,24 @@ public class MedicamentoListFragment extends ListFragment
 
 		getLoaderManager().initLoader(0, null, mCallbacks);
 
-		getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+		if (G.VERSION_ADMINISTRADOR){
+			getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+				@Override
+				public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-				if (mActionMode != null){
-					return false;
+					if (mActionMode != null){
+						return false;
+					}
+
+					mActionMode = getActivity().startActionMode(mActionModeCallback);
+
+					view.setSelected(true);
+					viewSeleccionado = view;
+
+					return true;
 				}
-
-				mActionMode = getActivity().startActionMode(mActionModeCallback);
-
-				view.setSelected(true);
-				viewSeleccionado = view;
-
-				return true;
-			}
-		});
+			});
+		}
 	}
 
 	ActionMode.Callback mActionModeCallback = new ActionMode.Callback(){
