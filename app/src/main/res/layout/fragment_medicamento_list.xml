@@ -31,12 +31,13 @@
              have to call it "@android:id/list" so ListActivity will
              find it -->
         <ListView android:id="@android:id/list"
-            android:layout_marginTop="?android:attr/actionBarSize"
+
             android:paddingTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawSelectorOnTop="false"/>
 
+        <!--android:layout_marginTop="?android:attr/actionBarSize"-->
         <!--android:paddingTop="@dimen/appbar_padding_top"-->
 
         <!-- Here is the view to show if the list is emtpy -->

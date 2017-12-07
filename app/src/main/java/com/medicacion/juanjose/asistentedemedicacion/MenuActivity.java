@@ -26,16 +26,6 @@ public class MenuActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /**
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -48,8 +38,9 @@ public class MenuActivity extends AppCompatActivity
         Button addMed = (Button) findViewById(R.id.addMed);
         Button manageAlarms = (Button) findViewById(R.id.gestionarAlarmas);
         Button managePictures = (Button) findViewById(R.id.gestionarFotos);
+        //Button buttonBDMeds = (Button) findViewById(R.id.btnBDMeds);
         Button buttonClinic = (Button) findViewById(R.id.centroSalud);
-        Button buttonBDMeds = (Button) findViewById(R.id.btnBDMeds);
+
 
 
         addMed.setOnClickListener(new View.OnClickListener() {
@@ -76,18 +67,19 @@ public class MenuActivity extends AppCompatActivity
             }
         });
 
-        buttonClinic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (getApplicationContext(), ClinicMap.class);
-                startActivity(intent);
-            }
-        });
-
+        /**
         buttonBDMeds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (getApplicationContext(), MedicamentoActivity.class);
+                startActivity(intent);
+            }
+        });*/
+
+        buttonClinic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (getApplicationContext(), ClinicMap.class);
                 startActivity(intent);
             }
         });

@@ -3,8 +3,6 @@ package com.medicacion.juanjose.asistentedemedicacion;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -21,6 +19,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.medicacion.juanjose.asistentedemedicacion.medicamento.MedicamentoListFragment;
 
 public class AlarmDiaryActivity extends AppCompatActivity {
 
@@ -152,7 +152,7 @@ public class AlarmDiaryActivity extends AppCompatActivity {
                     textMessage.setText("Aquí se incluirán las alarmas creadas por el usuario.");
                     break;
                 case 3:
-                    textMessage.setText("Aquí se mostrará un calendario de los medicamentos que ha de tomar y las horas.");
+                    textMessage.setText("Aquí se mostrará un calendario con los días.");
                     break;
             }*/
 
@@ -178,8 +178,9 @@ public class AlarmDiaryActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    MedicamentosFragment medicamentosFragment = new MedicamentosFragment();
-                    return medicamentosFragment;
+
+                    MedicamentoListFragment medicamentoListFragment = new MedicamentoListFragment();
+                    return medicamentoListFragment;
                 case 1:
                     AlarmasFragment alarmasFragment = new AlarmasFragment();
                     return alarmasFragment;

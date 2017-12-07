@@ -8,64 +8,59 @@
     tools:context="com.medicacion.juanjose.asistentedemedicacion.MenuActivity"
     tools:showIn="@layout/app_bar_menu">
 
-    <Button
-        android:id="@+id/addMed"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="260dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:text="Añadir medicación y hora"
-        android:textAllCaps="false"
-        android:textStyle="bold" />
+        android:layout_centerVertical="true">
 
-    <Button
+        <Button
+            android:id="@+id/addMed"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="276dp"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Añadir medicación y hora"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/gestionarAlarmas"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="45dp"
+            android:text="Gestionar alarmas y medicamentos"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/gestionarFotos"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="45dp"
+            android:text="Gestionar fotos"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/centroSalud"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="45dp"
+            android:text="Buscar centro de salud más cercano"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!--Button
         android:id="@+id/btnBDMeds"
         android:layout_width="260dp"
         android:layout_height="60dp"
-        android:layout_alignLeft="@+id/gestionarFotos"
-        android:layout_alignStart="@+id/gestionarFotos"
-        android:layout_below="@+id/gestionarFotos"
         android:layout_marginTop="25dp"
         android:text="Base de datos de medicamentos"
         android:textAllCaps="false"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/centroSalud"
-        android:layout_width="260dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/btnBDMeds"
-        android:layout_alignStart="@+id/btnBDMeds"
-        android:layout_below="@+id/btnBDMeds"
-        android:layout_marginTop="25dp"
-        android:text="Buscar centro de salud más cercano"
-        android:textAllCaps="false"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/gestionarAlarmas"
-        android:layout_width="260dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/addMed"
-        android:layout_alignStart="@+id/addMed"
-        android:layout_below="@+id/addMed"
-        android:layout_marginTop="25dp"
-        android:text="Gestionar alarmas"
-        android:textAllCaps="false"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/gestionarFotos"
-        android:layout_width="260dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/gestionarAlarmas"
-        android:layout_alignStart="@+id/gestionarAlarmas"
-        android:layout_below="@+id/gestionarAlarmas"
-        android:layout_marginTop="25dp"
-        android:text="Gestionar fotos"
-        android:textAllCaps="false"
-        android:textStyle="bold" />
+        android:textStyle="bold" /-->
 
 </RelativeLayout>

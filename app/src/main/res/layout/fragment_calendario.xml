@@ -2,12 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.medicacion.juanjose.asistentedemedicacion.MedicamentosFragment">
+    tools:context="com.medicacion.juanjose.asistentedemedicacion.CalendarioFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Calendario" />
+        android:paddingTop="150dp"
+        android:text="Aquí se mostrará un calendario con los días."
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
+        android:textStyle="bold|italic" />
 
 </FrameLayout>

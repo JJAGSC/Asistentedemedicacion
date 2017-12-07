@@ -18,7 +18,7 @@ import com.medicacion.juanjose.asistentedemedicacion.sync.Sincronizacion;
 import com.medicacion.juanjose.asistentedemedicacion.volley.Utils.LruBitmapCache;
 
 /**
- * Created by Tiburcio on 13/11/2016.
+ * Created by Juanjo on 06/12/2017.
  */
 
 public class AppController extends Application {
