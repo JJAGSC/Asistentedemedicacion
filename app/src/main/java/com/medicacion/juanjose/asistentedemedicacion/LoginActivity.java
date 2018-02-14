@@ -2,6 +2,7 @@ package com.medicacion.juanjose.asistentedemedicacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -51,9 +52,14 @@ public class LoginActivity extends AppCompatActivity {
         botonEmergencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Función no implementada todavía", Toast.LENGTH_SHORT).show();
+                makeCall("112");
             }
         });
+    }
+
+    private void makeCall(String phoneNumber){
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null));
+        startActivity(intent);
     }
 
     private void validar() {
@@ -74,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
             etPassR.requestFocus();
             return;
         }
-
 
         if (!userName.equalsIgnoreCase("antonio")) {
             etNameR.setError("Nombre no válido");
