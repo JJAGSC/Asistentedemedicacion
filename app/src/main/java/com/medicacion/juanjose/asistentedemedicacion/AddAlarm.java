@@ -58,7 +58,7 @@ public class AddAlarm extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "Alarma creada con éxito (no funcional todavía desde el menú anterior)", Toast.LENGTH_SHORT).show();
 
-            Intent openAlarms = new Intent(getApplicationContext(), MenuActivity.class);
+            Intent openAlarms = new Intent(getApplicationContext(), MenuSelectionActivity.class);
             startActivity(openAlarms);
         }
     }

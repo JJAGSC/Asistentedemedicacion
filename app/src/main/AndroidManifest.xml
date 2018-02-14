@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.medicacion.juanjose.asistentedemedicacion">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
@@ -28,67 +28,55 @@
         </activity>
         <activity
             android:name=".AddAlarm"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".MenuSelectionActivity"
             android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".MedProspect"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".MenuSelectionActivity"
             android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".ClinicMap"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".MenuSelectionActivity"
             android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".SavedProspects"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".MenuSelectionActivity"
             android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
-        </activity>
-        <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".AlarmDiaryActivity"
             android:label="@string/title_activity_alarm_diary"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".MenuSelectionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".HelpAlarmDiaryActivity"
@@ -99,7 +87,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".RegisterActivityN"
@@ -114,19 +102,19 @@
         <activity
             android:name=".BDMeds"
             android:label="@string/title_activity_bdmeds"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".MenuSelectionActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".medicamento.MedicamentoActivity"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".MenuSelectionActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".medicamento.MedicamentoAddActivity"
@@ -134,7 +122,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".medicamento.MedicamentoModificarActivity"
@@ -142,16 +130,16 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
+                android:value=".MenuSelectionActivity" />
         </activity>
         <activity
             android:name=".ManagePicturesActivity"
             android:label="@string/title_activity_manage_pictures"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".MenuSelectionActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.medicacion.juanjose.asistentedemedicacion.MenuActivity" />
+                android:value="com.medicacion.juanjose.asistentedemedicacion.MenuSelectionActivity" />
         </activity>
 
         <provider
@@ -162,7 +150,7 @@
 
         <service
             android:name=".authenticator.AuthenticatorService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
@@ -174,7 +162,7 @@
         <service
             android:name=".sync.SyncService"
             android:exported="false"
-            android:process=":sync" >
+            android:process=":sync">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
@@ -184,6 +172,15 @@
                 android:resource="@xml/syncadapter" />
         </service>
 
+        <activity
+            android:name=".MenuSelectionActivity"
+            android:parentActivityName=".MenuSelectionActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuSelectionActivity" />
+        </activity>
     </application>
 
 </manifest>

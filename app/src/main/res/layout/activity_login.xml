@@ -35,7 +35,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister"
         app:layout_constraintVertical_bias="0.144"
-        app:srcCompat="@mipmap/redbutton2" />
+        app:srcCompat="@drawable/sosbutton112" />
 
     <TextView
         android:id="@+id/txtUserRegister"

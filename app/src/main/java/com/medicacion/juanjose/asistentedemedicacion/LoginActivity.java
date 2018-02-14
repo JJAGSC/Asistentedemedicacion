@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         } else {
             if (userPass.equalsIgnoreCase("1234")) {
-                Intent abrirVentanaMenu = new Intent(context, MenuActivity.class);
+                Intent abrirVentanaMenu = new Intent(context, MenuSelectionActivity.class);
                 startActivity(abrirVentanaMenu);
 
             } else {
