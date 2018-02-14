@@ -15,7 +15,6 @@ public class MenuSelectionActivity extends AppCompatActivity {
 
         Button addMed = (Button) findViewById(R.id.addMed);
         Button manageAlarms = (Button) findViewById(R.id.gestionarAlarmas);
-        Button managePictures = (Button) findViewById(R.id.gestionarFotos);
         Button buttonClinic = (Button) findViewById(R.id.centroSalud);
 
         addMed.setOnClickListener(new View.OnClickListener() {
@@ -31,14 +30,6 @@ public class MenuSelectionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent openAlarms = new Intent(getApplicationContext(), AlarmDiaryActivity.class);
                 startActivity(openAlarms);
-            }
-        });
-
-        managePictures.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (getApplicationContext(), ManagePicturesActivity.class);
-                startActivity(intent);
             }
         });
 

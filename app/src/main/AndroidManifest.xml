@@ -132,15 +132,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-        <activity
-            android:name=".ManagePicturesActivity"
-            android:label="@string/title_activity_manage_pictures"
-            android:parentActivityName=".MenuSelectionActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.medicacion.juanjose.asistentedemedicacion.MenuSelectionActivity" />
-        </activity>
 
         <provider
             android:name=".proveedor.ProveedorDeContenido"

@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="312dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginBottom="8dp"
@@ -25,7 +25,7 @@
             android:id="@+id/addMed"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="276dp"
-            android:layout_height="60dp"
+            android:layout_height="75dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="Añadir medicación y hora"
@@ -35,25 +35,16 @@
         <Button
             android:id="@+id/gestionarAlarmas"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="75dp"
             android:layout_marginTop="45dp"
             android:text="Gestionar alarmas y medicamentos"
             android:textAllCaps="false"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/gestionarFotos"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="45dp"
-            android:text="Gestionar fotos"
-            android:textAllCaps="false"
-            android:textStyle="bold" />
-
-        <Button
             android:id="@+id/centroSalud"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="75dp"
             android:layout_marginTop="45dp"
             android:text="Buscar centro de salud más cercano"
             android:textAllCaps="false"
