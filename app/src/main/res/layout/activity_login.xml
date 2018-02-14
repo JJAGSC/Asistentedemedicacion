@@ -78,7 +78,6 @@
         tools:layout_editor_absoluteY="506dp"
         tools:layout_editor_absoluteX="0dp" />
 
-
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="wrap_content"
@@ -148,7 +147,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintVertical_bias="0.599"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
         android:id="@+id/txtTest"
@@ -161,7 +160,6 @@
         android:textColor="@android:color/holo_red_dark"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"/>
 
 </android.support.constraint.ConstraintLayout>

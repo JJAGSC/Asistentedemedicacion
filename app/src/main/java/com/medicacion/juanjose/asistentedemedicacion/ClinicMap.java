@@ -20,16 +20,13 @@ public class ClinicMap extends AppCompatActivity {
         setContentView(R.layout.activity_clinic_map);
 
         etSearchCl = (EditText)findViewById(R.id.etSearchClinic);
-
         Button btnSearchCl = (Button)findViewById(R.id.btnSearchClinic);
-
         btnSearchCl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validar();
             }
         });
-
     }
 
     private void validar(){
