@@ -20,7 +20,7 @@ public class MenuSelectionActivity extends AppCompatActivity {
         addMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),AddAlarm.class);
+                Intent intent = new Intent(getApplicationContext(),AddAlarmMed.class);
                 startActivity(intent);
             }
         });

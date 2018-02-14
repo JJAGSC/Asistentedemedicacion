@@ -11,29 +11,23 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class AddAlarm extends AppCompatActivity {
+public class AddAlarmMed extends AppCompatActivity {
 
-    Activity context;
     EditText medName;
     String medNameUser;
-    RadioGroup radioGroupDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_alarm);
+        setContentView(R.layout.activity_add_alarm_med);
 
-        context = this;
         medName = (EditText) findViewById(R.id.etMedName);
 
-
         Button createAlarm = (Button) findViewById(R.id.btnCreateAlarm);
-        radioGroupDays = (RadioGroup) findViewById(R.id.rGroupDays);
 
         createAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 validar();
             }
         });
@@ -44,22 +38,12 @@ public class AddAlarm extends AppCompatActivity {
 
         medNameUser = medName.getText().toString();
 
-        if (radioGroupDays.getCheckedRadioButtonId()==-1){
-            Toast.makeText(getApplicationContext(), "Error, no ha seleccionada la duración", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
         if (TextUtils.isEmpty(medNameUser)) {
             medName.setError(getString(R.string.error_campo_obligatorio));
             medName.requestFocus();
 
         } else {
-
-            Toast.makeText(getApplicationContext(), "Alarma creada con éxito (no funcional todavía desde el menú anterior)", Toast.LENGTH_SHORT).show();
-
-            Intent openAlarms = new Intent(getApplicationContext(), MenuSelectionActivity.class);
-            startActivity(openAlarms);
+            Toast.makeText(getApplicationContext(), "Alarmas creadas con éxito (no funcional todavía)", Toast.LENGTH_SHORT).show();
         }
     }
 }
