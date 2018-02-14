@@ -56,15 +56,6 @@
         </activity>
 
         <activity
-            android:name=".SavedProspects"
-            android:parentActivityName=".MenuSelectionActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuSelectionActivity" />
-        </activity>
-
-        <activity
             android:name=".AlarmDiaryActivity"
             android:label="@string/title_activity_alarm_diary"
             android:parentActivityName=".MenuSelectionActivity"

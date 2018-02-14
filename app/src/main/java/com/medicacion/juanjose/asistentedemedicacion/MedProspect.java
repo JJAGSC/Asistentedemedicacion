@@ -34,8 +34,8 @@ public class MedProspect extends AppCompatActivity {
         savedProspects.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, SavedProspects.class);
-                startActivity(intent);
+                //Intent intent = new Intent(context, SavedProspects.class);
+                //startActivity(intent);
             }
         });
     }

@@ -63,16 +63,6 @@ public class AlarmDiaryActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        /**
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
     }
 
 
@@ -145,21 +135,6 @@ public class AlarmDiaryActivity extends AppCompatActivity {
             TextView textMessage = (TextView) rootView.findViewById(R.id.section_label);
             textMessage.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 
-            /**
-            positionTab = getArguments().getInt(ARG_SECTION_NUMBER);
-
-            switch (positionTab){
-                case 1:
-                    textMessage.setText("Aquí se verá una lista de los medicamentos que toma el usuario.");
-                    break;
-                case 2:
-                    textMessage.setText("Aquí se incluirán las alarmas creadas por el usuario.");
-                    break;
-                case 3:
-                    textMessage.setText("Aquí se mostrará un calendario con los días.");
-                    break;
-            }*/
-
             return rootView;
         }
     }
@@ -184,12 +159,6 @@ public class AlarmDiaryActivity extends AppCompatActivity {
                 case 0:
                     MedicamentoListFragment medicamentoListFragment = new MedicamentoListFragment();
                     return medicamentoListFragment;
-                case 1:
-                    AlarmasFragment alarmasFragment = new AlarmasFragment();
-                    return alarmasFragment;
-                case 2:
-                    CalendarioFragment calendarioFragment = new CalendarioFragment();
-                    return calendarioFragment;
             }
             return null;
         }
@@ -197,7 +166,7 @@ public class AlarmDiaryActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 1;
         }
 
         @Override
@@ -205,10 +174,6 @@ public class AlarmDiaryActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return "Medicamentos";
-                case 1:
-                    return "Alarmas";
-                case 2:
-                    return "Calendario";
             }
             return null;
         }
