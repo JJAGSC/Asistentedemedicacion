@@ -51,10 +51,10 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/etMedicamentoFormato"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/medicamento_formato"
-            android:id="@+id/etMedicamentoFormato"/>
+            android:hint="Hora" />
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout

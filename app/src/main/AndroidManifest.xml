@@ -88,6 +88,7 @@
 
         <activity
             android:name=".medicamento.MedicamentoActivity"
+            android:label="Alarmas guardadas"
             android:parentActivityName=".MenuSelectionActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

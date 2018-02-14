@@ -30,7 +30,7 @@ public class MedicamentoActivity extends AppCompatActivity {
         transaction.add(R.id.fragment_medicamento, medicamentoListFragment);
         transaction.commit();
 
-        if (G.VERSION_ADMINISTRADOR) {
+/*        if (G.VERSION_ADMINISTRADOR) {
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setVisibility(View.VISIBLE);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +40,6 @@ public class MedicamentoActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-        }
+        }*/
     }
 }

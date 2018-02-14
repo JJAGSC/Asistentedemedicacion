@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.medicacion.juanjose.asistentedemedicacion.medicamento.MedicamentoActivity;
+
+
 public class MenuSelectionActivity extends AppCompatActivity {
 
     @Override
@@ -28,7 +31,8 @@ public class MenuSelectionActivity extends AppCompatActivity {
         manageAlarms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openAlarms = new Intent(getApplicationContext(), AlarmDiaryActivity.class);
+                Intent openAlarms = new Intent(getApplicationContext(), MedicamentoActivity.class);
+
                 startActivity(openAlarms);
             }
         });
