@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         botonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent abrirVentanaRegistro = new Intent (context, RegisterActivityN.class);
+                Intent abrirVentanaRegistro = new Intent (context, RegisterActivity.class);
                 startActivity(abrirVentanaRegistro);
             }
         });

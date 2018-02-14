@@ -16,26 +16,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MenuSelectionActivity"
             android:parentActivityName=".MenuSelectionActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-
         <activity
             android:name=".AddAlarm"
             android:parentActivityName=".MenuSelectionActivity"
@@ -99,16 +98,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-        <activity
-            android:name=".RegisterActivityN"
-            android:label="Registrar Usuario"
-            android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginActivity" />
-        </activity>
+
         <activity
             android:name=".BDMeds"
             android:label="@string/title_activity_bdmeds"
@@ -181,5 +171,16 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
+
+        <activity android:name=".RegisterActivity"
+            android:label="Registrar Usuario"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity"/>
+        </activity>
+
     </application>
+
 </manifest>

@@ -1,36 +1,27 @@
 package com.medicacion.juanjose.asistentedemedicacion;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class RegisterActivityN extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     EditText etNameReg;
     EditText etPassReg;
-    EditText etEdadReg;
+    EditText etPassRegRep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_n);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_register);
 
         etNameReg = (EditText) findViewById(R.id.etNameReg);
         etPassReg = (EditText) findViewById(R.id.etPassReg);
-        etEdadReg = (EditText) findViewById(R.id.etAgeReg);
+        etPassRegRep = (EditText) findViewById(R.id.etPassReg);
 
         Button registrarUsuario = (Button) findViewById(R.id.btnRegisterUser);
 
@@ -40,24 +31,6 @@ public class RegisterActivityN extends AppCompatActivity {
                 validar();
             }
         });
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_register_activity_n, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings2) {
-            Toast.makeText(getApplicationContext(), "Ajustes no implementados todavía", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void validar(){
@@ -66,11 +39,9 @@ public class RegisterActivityN extends AppCompatActivity {
 
         etNameReg.setError(null);
         etPassReg.setError(null);
-        etEdadReg.setError(null);
 
         String userName = etNameReg.getText().toString();
         String userPass = etPassReg.getText().toString();
-        String userAge = etEdadReg.getText().toString();
 
         if (TextUtils.isEmpty(userName)) {
             etNameReg.setError(getString(R.string.error_campo_obligatorio));
@@ -84,19 +55,6 @@ public class RegisterActivityN extends AppCompatActivity {
             datosCorrectos = false;
         }
 
-        if (TextUtils.isEmpty(userAge)) {
-            etEdadReg.setError(getString(R.string.error_campo_obligatorio));
-            etEdadReg.requestFocus();
-            return;
-        }
-
-        int edad = Integer.parseInt(userAge);
-
-        if (edad<1 || edad>110){
-            etEdadReg.setError(getString(R.string.error_edad));
-            etEdadReg.requestFocus();
-            return;
-        }
 
         if (datosCorrectos){
             Toast.makeText(getApplicationContext(), "¡Usuario creado con éxito! (modo test, el usuario " +
