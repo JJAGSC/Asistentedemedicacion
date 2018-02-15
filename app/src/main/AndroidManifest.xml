@@ -48,28 +48,8 @@
 
         <activity
             android:name=".ClinicMap"
+            android:label="Clínica más cercana"
             android:parentActivityName=".MenuSelectionActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuSelectionActivity" />
-        </activity>
-
-        <activity
-            android:name=".AlarmDiaryActivity"
-            android:label="@string/title_activity_alarm_diary"
-            android:parentActivityName=".MenuSelectionActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuSelectionActivity" />
-        </activity>
-
-        <activity
-            android:name=".HelpAlarmDiaryActivity"
-            android:label="Ayuda Diario"
-            android:parentActivityName=".AlarmDiaryActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
