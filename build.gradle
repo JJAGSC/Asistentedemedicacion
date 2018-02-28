@@ -17,6 +17,9 @@ allprojects {
     repositories {
         jcenter()
         google()
+
+        // repositorio materialdatatimepicker
+        maven { url 'https://jitpack.io'}
     }
 }
 

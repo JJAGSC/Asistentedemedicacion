@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/txtMedName"
             android:layout_width="192dp"
             android:layout_height="wrap_content"
             android:text="Nombre del medicamento:"
@@ -42,8 +42,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="306dp"
-        android:layout_height="284dp"
+        android:layout_width="317dp"
+        android:layout_height="302dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -52,9 +52,10 @@
         android:weightSum="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.179">
+        app:layout_constraintVertical_bias="0.064">
 
         <TextView
             android:id="@+id/tvAlarms"
@@ -71,27 +72,22 @@
             android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="106dp"
-                android:layout_height="45dp"
+            <Button
+                android:id="@+id/btnAlarm1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="08:30"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:text="--:--"
+                android:textSize="24sp" />
 
-            <TextView
-                android:layout_width="106dp"
-                android:layout_height="45dp"
+            <Button
+                android:id="@+id/btnAlarm2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="16:30"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:text="--:--"
+                android:textSize="24sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -100,27 +96,22 @@
             android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="106dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:text="00:30"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="106dp"
-                android:layout_height="45dp"
+            <Button
+                android:id="@+id/btnAlarm3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="--:--"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/btnAlarm4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="--:--"
+                android:textSize="24sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -129,44 +120,39 @@
             android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="106dp"
-                android:layout_height="45dp"
+            <Button
+                android:id="@+id/btnAlarm5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="--:--"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="24sp" />
 
-            <TextView
-                android:layout_width="106dp"
-                android:layout_height="45dp"
+            <Button
+                android:id="@+id/btnAlarm6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="--:--"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="24sp" />
+
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btnCreateAlarm"
-        android:layout_width="283dp"
-        android:layout_height="46dp"
+        android:layout_width="297dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="Crear alarmas de medicamento"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.275" />
+        app:layout_constraintVertical_bias="0.181" />
 
 </android.support.constraint.ConstraintLayout>

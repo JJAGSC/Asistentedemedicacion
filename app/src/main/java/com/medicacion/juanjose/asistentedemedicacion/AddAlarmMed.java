@@ -1,20 +1,23 @@
 package com.medicacion.juanjose.asistentedemedicacion;
 
-import android.app.Activity;
-import android.content.Intent;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class AddAlarmMed extends AppCompatActivity {
+import java.util.Calendar;
+
+public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
     EditText medName;
     String medNameUser;
+    Button btnAlarm1, btnAlarm2, btnAlarm3, btnAlarm4, btnAlarm5, btnAlarm6;
+    int btnPulsado;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,102 @@ public class AddAlarmMed extends AppCompatActivity {
 
         medName = (EditText) findViewById(R.id.etMedName);
 
+        // Botones para configurar las alarmas
+        btnAlarm1 = (Button) findViewById(R.id.btnAlarm1);
+        btnAlarm2 = (Button) findViewById(R.id.btnAlarm2);
+        btnAlarm3 = (Button) findViewById(R.id.btnAlarm3);
+        btnAlarm4 = (Button) findViewById(R.id.btnAlarm4);
+        btnAlarm5 = (Button) findViewById(R.id.btnAlarm5);
+        btnAlarm6 = (Button) findViewById(R.id.btnAlarm6);
+
+        // Añadimos un selector de tiempo al botón donde se podrá elegir la hora y los minutos
+        // en formato 24 horas
+        btnAlarm1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(AddAlarmMed.this
+                        , now.get(Calendar.HOUR_OF_DAY)
+                        , now.get(Calendar.MINUTE)
+                        ,true);
+                timePickerDialog.setTitle("Seleccione la hora");
+                timePickerDialog.show(getFragmentManager(), "Selector hora");
+                btnPulsado = 1;
+            }
+        });
+
+        btnAlarm2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(AddAlarmMed.this
+                        , now.get(Calendar.HOUR_OF_DAY)
+                        , now.get(Calendar.MINUTE)
+                        ,true);
+                timePickerDialog.setTitle("Seleccione la hora");
+                timePickerDialog.show(getFragmentManager(), "Selector hora");
+                btnPulsado = 2;
+            }
+        });
+
+        btnAlarm3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(AddAlarmMed.this
+                        , now.get(Calendar.HOUR_OF_DAY)
+                        , now.get(Calendar.MINUTE)
+                        ,true);
+                timePickerDialog.setTitle("Seleccione la hora");
+                timePickerDialog.show(getFragmentManager(), "Selector hora");
+                btnPulsado = 3;
+            }
+        });
+
+        btnAlarm4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(AddAlarmMed.this
+                        , now.get(Calendar.HOUR_OF_DAY)
+                        , now.get(Calendar.MINUTE)
+                        ,true);
+                timePickerDialog.setTitle("Seleccione la hora");
+                timePickerDialog.show(getFragmentManager(), "Selector hora");
+                btnPulsado = 4;
+            }
+        });
+
+        btnAlarm5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(AddAlarmMed.this
+                        , now.get(Calendar.HOUR_OF_DAY)
+                        , now.get(Calendar.MINUTE)
+                        ,true);
+                timePickerDialog.setTitle("Seleccione la hora");
+                timePickerDialog.show(getFragmentManager(), "Selector hora");
+                btnPulsado = 5;
+            }
+        });
+
+        btnAlarm6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(AddAlarmMed.this
+                        , now.get(Calendar.HOUR_OF_DAY)
+                        , now.get(Calendar.MINUTE)
+                        ,true);
+                timePickerDialog.setTitle("Seleccione la hora");
+                timePickerDialog.show(getFragmentManager(), "Selector hora");
+                btnPulsado = 6;
+            }
+        });
+
+
+        // Botón que crea las alarmas
         Button createAlarm = (Button) findViewById(R.id.btnCreateAlarm);
 
         createAlarm.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +131,7 @@ public class AddAlarmMed extends AppCompatActivity {
             }
         });
     }
+
 
     private void validar(){
         medName.setError(null);
@@ -45,5 +145,34 @@ public class AddAlarmMed extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Alarmas creadas con éxito (no funcional todavía)", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    @Override
+    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
+
+        Toast.makeText(this, String.format("%02d:%02d", hourOfDay, minute), Toast.LENGTH_SHORT).show();
+
+        switch (btnPulsado){
+            case 1:
+                btnAlarm1.setText(String.format("%02d:%02d", hourOfDay, minute));
+                break;
+            case 2:
+                btnAlarm2.setText(String.format("%02d:%02d", hourOfDay, minute));
+                break;
+            case 3:
+                btnAlarm3.setText(String.format("%02d:%02d", hourOfDay, minute));
+                break;
+            case 4:
+                btnAlarm4.setText(String.format("%02d:%02d", hourOfDay, minute));
+                break;
+            case 5:
+                btnAlarm5.setText(String.format("%02d:%02d", hourOfDay, minute));
+                break;
+            case 6:
+                btnAlarm6.setText(String.format("%02d:%02d", hourOfDay, minute));
+                break;
+        }
+
     }
 }

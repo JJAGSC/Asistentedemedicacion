@@ -32,4 +32,7 @@ dependencies {
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.android.volley:volley:1.0.0'
     testCompile 'junit:junit:4.12'
+
+    // Librerias para los datetimepicker
+    compile 'com.github.wdullaer:MaterialDateTimePicker:v3.0.0'
 }
