@@ -28,7 +28,7 @@ import java.io.FileNotFoundException;
 public class MedicamentoModificarActivity extends AppCompatActivity {
 
     EditText etMedicamentoNombre;
-    EditText etMedicamentoFormato;
+    EditText etMedicamentoHora;
 
     int medID;
 
@@ -48,13 +48,13 @@ public class MedicamentoModificarActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etMedicamentoNombre = (EditText) findViewById(R.id.etMedicamentoNombre);
-        etMedicamentoFormato = (EditText) findViewById(R.id.etMedicamentoFormato);
+        etMedicamentoHora = (EditText) findViewById(R.id.etMedicamentoHora);
 
         medID = this.getIntent().getExtras().getInt(Contrato.Medicamento._ID);
         Medicamento medicamento = MedicamentoProveedor.readRecord(getContentResolver(), medID);
 
         etMedicamentoNombre.setText(medicamento.getNombre());
-        etMedicamentoFormato.setText(medicamento.getFormato());
+        etMedicamentoHora.setText(medicamento.getHora());
 
         imgMed = (ImageView) findViewById(R.id.imgAddMed);
 
@@ -150,10 +150,10 @@ public class MedicamentoModificarActivity extends AppCompatActivity {
     void attemptGuardar(){
 
         etMedicamentoNombre.setError(null);
-        etMedicamentoFormato.setError(null);
+        etMedicamentoHora.setError(null);
 
         String nombre = String.valueOf(etMedicamentoNombre.getText());
-        String formato = String.valueOf(etMedicamentoFormato.getText());
+        String formato = String.valueOf(etMedicamentoHora.getText());
 
         if (TextUtils.isEmpty(nombre)){
             etMedicamentoNombre.setError(getString(R.string.error_campo_obligatorio));
@@ -161,8 +161,8 @@ public class MedicamentoModificarActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(formato)){
-            etMedicamentoFormato.setError(getString(R.string.error_campo_obligatorio));
-            etMedicamentoFormato.requestFocus();
+            etMedicamentoHora.setError(getString(R.string.error_campo_obligatorio));
+            etMedicamentoHora.requestFocus();
         }
 
         Medicamento medicamento = new Medicamento(medID, nombre, formato, foto);

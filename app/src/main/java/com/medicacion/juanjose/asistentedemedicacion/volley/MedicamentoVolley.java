@@ -83,7 +83,7 @@ public class MedicamentoVolley {
         try {
             jsonObject.put("PK_ID", medicamento.getID());
             jsonObject.put("nombre", medicamento.getNombre());
-            jsonObject.put("formato", medicamento.getFormato());
+            jsonObject.put("hora", medicamento.getHora());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -123,7 +123,7 @@ public class MedicamentoVolley {
         try {
             jsonObject.put("PK_ID", medicamento.getID());
             jsonObject.put("nombre", medicamento.getNombre());
-            jsonObject.put("formato", medicamento.getFormato());
+            jsonObject.put("hora", medicamento.getHora());
         } catch (JSONException e) {
             e.printStackTrace();
         }

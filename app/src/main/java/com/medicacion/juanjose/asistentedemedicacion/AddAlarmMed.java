@@ -1,6 +1,14 @@
 package com.medicacion.juanjose.asistentedemedicacion;
 
+import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
+import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
+import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
@@ -17,12 +26,16 @@ public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.O
     String medNameUser;
     Button btnAlarm1, btnAlarm2, btnAlarm3, btnAlarm4, btnAlarm5, btnAlarm6;
     int btnPulsado;
-
+    ArrayList<Medicamento>listaAlarmasMedicamento;
+    Medicamento medicamento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_alarm_med);
+
+        // Creamos la lista que contendrá las alarmas para después guardarlas en la base de datos
+        listaAlarmasMedicamento = new ArrayList<>();
 
         medName = (EditText) findViewById(R.id.etMedName);
 
@@ -128,6 +141,8 @@ public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.O
             @Override
             public void onClick(View view) {
                 validar();
+
+                attemptGuardarAlarmasBaseDatos();
             }
         });
     }
@@ -143,7 +158,7 @@ public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.O
             medName.requestFocus();
 
         } else {
-            Toast.makeText(getApplicationContext(), "Alarmas creadas con éxito (no funcional todavía)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Alarmas creadas con éxito", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -174,5 +189,41 @@ public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.O
                 break;
         }
 
+        medicamento = new Medicamento(String.valueOf(medName.getText()), String.format("%02d:%02d", hourOfDay, minute));
+        listaAlarmasMedicamento.add(medicamento);
+
+        Toast.makeText(this, "Test: añadido al ArrayList", Toast.LENGTH_SHORT).show();
+    }
+
+    void attemptGuardarAlarmasBaseDatos(){
+//        etMedicamentoNombre = (EditText) findViewById(R.id.etMedicamentoNombre);
+//        etMedicamentoHora = (EditText) findViewById(R.id.etMedicamentoHora);
+//
+//        etMedicamentoNombre.setError(null);
+//        etMedicamentoHora.setError(null);
+//
+//        String nombre = String.valueOf(etMedicamentoNombre.getText());
+//        String hora = String.valueOf(etMedicamentoHora.getText());
+//
+//        if (TextUtils.isEmpty(nombre)){
+//            etMedicamentoNombre.setError(getString(R.string.error_campo_obligatorio));
+//            etMedicamentoNombre.requestFocus();
+//        }
+//
+//        if (TextUtils.isEmpty(hora)){
+//            etMedicamentoHora.setError(getString(R.string.error_campo_obligatorio));
+//            etMedicamentoHora.requestFocus();
+//        }
+
+        //String nombre = String.valueOf(medName.getText());
+
+        //Medicamento medicamento = new Medicamento(G.SIN_VALOR_INT, nombre, hora);
+
+        for (Medicamento medicamento:listaAlarmasMedicamento) {
+            MedicamentoProveedor.insertRecordConBitacora(getContentResolver(), medicamento, this);
+        }
+
+        //MedicamentoProveedor.insertRecordConBitacora(getContentResolver(), medicamento, this);
+        //finish();
     }
 }

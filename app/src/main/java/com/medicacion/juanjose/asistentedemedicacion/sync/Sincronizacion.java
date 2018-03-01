@@ -103,7 +103,7 @@ public class Sincronizacion {
             JSONObject obj = null;
             for (int i = 0; i < jsonArray.length(); i++ ){
                 obj = jsonArray.getJSONObject(i);
-                registrosNuevos.add(new Medicamento(obj.getInt("PK_ID"), obj.getString("nombre"), obj.getString("formato")));
+                registrosNuevos.add(new Medicamento(obj.getInt("PK_ID"), obj.getString("nombre"), obj.getString("hora")));
             }
 
             for(Medicamento medicamento: registrosNuevos) {

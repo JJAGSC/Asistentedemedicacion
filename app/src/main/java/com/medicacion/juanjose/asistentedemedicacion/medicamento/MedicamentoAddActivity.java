@@ -28,7 +28,7 @@ import java.io.IOException;
 public class MedicamentoAddActivity extends AppCompatActivity {
 
     EditText etMedicamentoNombre;
-    EditText etMedicamentoFormato;
+    EditText etMedicamentoHora;
 
     final int PETICION_SACAR_FOTO = 1;
     final int PETICION_GALERIA = 2;
@@ -130,25 +130,25 @@ public class MedicamentoAddActivity extends AppCompatActivity {
 
     void attemptGuardar(){
         etMedicamentoNombre = (EditText) findViewById(R.id.etMedicamentoNombre);
-        etMedicamentoFormato = (EditText) findViewById(R.id.etMedicamentoFormato);
+        etMedicamentoHora = (EditText) findViewById(R.id.etMedicamentoHora);
 
         etMedicamentoNombre.setError(null);
-        etMedicamentoFormato.setError(null);
+        etMedicamentoHora.setError(null);
 
         String nombre = String.valueOf(etMedicamentoNombre.getText());
-        String formato = String.valueOf(etMedicamentoFormato.getText());
+        String hora = String.valueOf(etMedicamentoHora.getText());
 
         if (TextUtils.isEmpty(nombre)){
             etMedicamentoNombre.setError(getString(R.string.error_campo_obligatorio));
             etMedicamentoNombre.requestFocus();
         }
 
-        if (TextUtils.isEmpty(formato)){
-            etMedicamentoFormato.setError(getString(R.string.error_campo_obligatorio));
-            etMedicamentoFormato.requestFocus();
+        if (TextUtils.isEmpty(hora)){
+            etMedicamentoHora.setError(getString(R.string.error_campo_obligatorio));
+            etMedicamentoHora.requestFocus();
         }
 
-        Medicamento medicamento = new Medicamento(G.SIN_VALOR_INT, nombre, formato, foto);
+        Medicamento medicamento = new Medicamento(G.SIN_VALOR_INT, nombre, hora, foto);
 
         MedicamentoProveedor.insertRecordConBitacora(getContentResolver(), medicamento, this);
         finish();

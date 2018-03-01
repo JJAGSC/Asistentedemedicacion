@@ -172,7 +172,7 @@ public class MedicamentoListFragment extends ListFragment
 		// currently filtering.
 		String columns[] = new String[] { Contrato.Medicamento._ID,
 										  Contrato.Medicamento.NOMBRE,
-				                          Contrato.Medicamento.FORMATO
+				                          Contrato.Medicamento.HORA
 										};
 
 		Uri baseUri = Contrato.Medicamento.CONTENT_URI;
@@ -212,7 +212,7 @@ public class MedicamentoListFragment extends ListFragment
 		public void bindView(View view, Context context, Cursor cursor) {
 			int ID = cursor.getInt(cursor.getColumnIndex(Contrato.Medicamento._ID));
 			String nombre = cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.NOMBRE));
-			String formato = cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.FORMATO));
+			String formato = cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.HORA));
 	
 			TextView textviewNombre = (TextView) view.findViewById(R.id.textview_medicamento_list_item_nombre);
 			textviewNombre.setText(nombre);

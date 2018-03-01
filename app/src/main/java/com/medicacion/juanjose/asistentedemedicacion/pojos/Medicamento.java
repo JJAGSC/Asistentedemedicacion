@@ -9,27 +9,27 @@ import android.graphics.Bitmap;
 public class Medicamento {
     private int ID;
     String nombre;
-    String formato;
+    String hora;
     private Bitmap imagen;
 
     public Medicamento() {
     }
 
-    public Medicamento(String nombre, String formato) {
+    public Medicamento(String nombre, String hora) {
         this.nombre = nombre;
-        this.formato = formato;
+        this.hora = hora;
     }
 
-    public Medicamento(int ID, String nombre, String formato) {
+    public Medicamento(int ID, String nombre, String hora) {
         this.ID = ID;
         this.nombre = nombre;
-        this.formato = formato;
+        this.hora = hora;
     }
 
-    public Medicamento(int ID, String nombre, String formato, Bitmap imagen) {
+    public Medicamento(int ID, String nombre, String hora, Bitmap imagen) {
         this.ID = ID;
         this.nombre = nombre;
-        this.formato = formato;
+        this.hora = hora;
         this.imagen = imagen;
     }
 
@@ -49,12 +49,12 @@ public class Medicamento {
         this.nombre = nombre;
     }
 
-    public String getFormato() {
-        return formato;
+    public String getHora() {
+        return hora;
     }
 
-    public void setFormato(String formato) {
-        this.formato = formato;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     public Bitmap getImagen() {
