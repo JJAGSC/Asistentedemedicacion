@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginTop="45dp"
-            android:text="Buscar centro de salud más cercano"
+            android:text="Ver clínicas más cercanas"
             android:textAllCaps="false"
             android:textStyle="bold" />
     </LinearLayout>

@@ -32,7 +32,7 @@ public class MenuSelectionActivity extends AppCompatActivity {
         addMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),AddAlarmMed.class);
+                Intent intent = new Intent(getApplicationContext(), AddAlarmMed.class);
                 startActivity(intent);
             }
         });
@@ -49,14 +49,14 @@ public class MenuSelectionActivity extends AppCompatActivity {
         buttonClinic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (getApplicationContext(), ClinicMap.class);
+                Intent intent = new Intent(getApplicationContext(), NearClinicMap.class);
                 startActivity(intent);
             }
         });
 
     }
 
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         iniciarAlarmas();
     }
@@ -74,41 +74,44 @@ public class MenuSelectionActivity extends AppCompatActivity {
 
         listaAlarmasGuardadas = MedicamentoProveedor.readAllRecord(getContentResolver());
 
-        if (listaAlarmasGuardadas.size()>0){
+        if (listaAlarmasGuardadas.size() > 0) {
 
-            for (int i = 0; i < listaAlarmasGuardadas.size(); i++){
+            for (int i = 0; i < listaAlarmasGuardadas.size(); i++) {
 
                 int horaAlarm = listaAlarmasGuardadas.get(i).getHoraNum();
                 int minutoAlarm = listaAlarmasGuardadas.get(i).getMinuteNum();
 
-            calendar.set(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    horaAlarm,
-                    minutoAlarm,
-                    0);
+                calendar.set(
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH),
+                        horaAlarm,
+                        minutoAlarm,
+                        0);
 
 
-            if (calendar.getTimeInMillis()> (System.currentTimeMillis()+5000)){
-                Intent intent = new Intent (this, MyAlarm.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, intent, 0);
+                if (calendar.getTimeInMillis() > (System.currentTimeMillis() + 5000)) {
+                    Intent intent = new Intent(this, MyAlarm.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, intent, 0);
 
-                managerAlarm.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                    managerAlarm.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
-                listaPendingIntent.add(pendingIntent);
+                    listaPendingIntent.add(pendingIntent);
 
-                Toast.makeText(this, "Ha entrado", Toast.LENGTH_SHORT).show();
+                    if (minutoAlarm<10){
+                        Toast.makeText(this, "Alarma: " + horaAlarm + ":0" + minutoAlarm + " activada", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Alarma: " + horaAlarm + ":" + minutoAlarm + " activada", Toast.LENGTH_SHORT).show();
+                    }
 
-                Toast.makeText(this, "Alarma: "+horaAlarm+":"+minutoAlarm+ " activada.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "No ha entrado", Toast.LENGTH_SHORT).show();
-            }
+                } else {
+                    Toast.makeText(this, "No hay alarmas próximas en el tiempo", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
         } else {
-            Toast.makeText(this, "No hay alarmas pendientes", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No hay alarmas almacenadas", Toast.LENGTH_SHORT).show();
         }
 
     }

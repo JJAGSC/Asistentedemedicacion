@@ -2,11 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.medicacion.juanjose.asistentedemedicacion">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Google Maps -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSER" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".aplicacion.AppController"
@@ -16,17 +28,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MenuSelectionActivity"
             android:label="Menú Principal"
@@ -36,7 +47,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-
         <activity
             android:name=".MedProspect"
             android:parentActivityName=".MenuSelectionActivity"
@@ -45,7 +55,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-
         <activity
             android:name=".ClinicMap"
             android:label="Clínica más cercana"
@@ -55,7 +64,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-
         <activity
             android:name=".BDMeds"
             android:label="@string/title_activity_bdmeds"
@@ -65,7 +73,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-
         <activity
             android:name=".medicamento.MedicamentoActivity"
             android:label="Alarmas guardadas"
@@ -75,7 +82,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-
         <activity
             android:name=".medicamento.MedicamentoAddActivity"
             android:parentActivityName=".medicamento.MedicamentoActivity"
@@ -84,7 +90,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
         </activity>
-
         <activity
             android:name=".medicamento.MedicamentoModificarActivity"
             android:parentActivityName=".medicamento.MedicamentoActivity"
@@ -111,7 +116,6 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
-
         <service
             android:name=".sync.SyncService"
             android:exported="false"
@@ -134,7 +138,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
         </activity>
-
         <activity
             android:name=".AddAlarmMed"
             android:label="Crear alarmas"
@@ -148,7 +151,26 @@
         <receiver
             android:name=".MyAlarm"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".NearClinicMap"
+            android:label="@string/title_activity_clinics_map">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.medicacion.juanjose.asistentedemedicacion.MenuSelectionActivity" />
+        </activity>
     </application>
 
 </manifest>

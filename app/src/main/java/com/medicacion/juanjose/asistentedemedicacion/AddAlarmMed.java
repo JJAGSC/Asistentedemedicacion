@@ -168,31 +168,31 @@ public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.O
 
         Toast.makeText(this, String.format("%02d:%02d", hourOfDay, minute), Toast.LENGTH_SHORT).show();
 
+        String hourFormat = String.format("%02d:%02d", hourOfDay, minute);
+
         switch (btnPulsado){
             case 1:
-                btnAlarm1.setText(String.format("%02d:%02d", hourOfDay, minute));
+                btnAlarm1.setText(hourFormat);
                 break;
             case 2:
-                btnAlarm2.setText(String.format("%02d:%02d", hourOfDay, minute));
+                btnAlarm2.setText(hourFormat);
                 break;
             case 3:
-                btnAlarm3.setText(String.format("%02d:%02d", hourOfDay, minute));
+                btnAlarm3.setText(hourFormat);
                 break;
             case 4:
-                btnAlarm4.setText(String.format("%02d:%02d", hourOfDay, minute));
+                btnAlarm4.setText(hourFormat);
                 break;
             case 5:
-                btnAlarm5.setText(String.format("%02d:%02d", hourOfDay, minute));
+                btnAlarm5.setText(hourFormat);
                 break;
             case 6:
-                btnAlarm6.setText(String.format("%02d:%02d", hourOfDay, minute));
+                btnAlarm6.setText(hourFormat);
                 break;
         }
 
         medicamento = new Medicamento(String.valueOf(medName.getText()), String.format("%02d:%02d", hourOfDay, minute));
         listaAlarmasMedicamento.add(medicamento);
-
-        Toast.makeText(this, "Test: añadido al ArrayList", Toast.LENGTH_SHORT).show();
     }
 
     void attemptGuardarAlarmasBaseDatos(){
