@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.medicacion.juanjose.asistentedemedicacion.medicamento.MedicamentoActivity;
+import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
+import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -61,31 +64,53 @@ public class MenuSelectionActivity extends AppCompatActivity {
     // El sistema iniciará automáticamente las alarmas almacenadas
     private void iniciarAlarmas() {
 
-        for(int i = 1; i<3; i++){
-            Calendar calendar = Calendar.getInstance();
+        AlarmManager managerAlarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+
+        // Lista con todas las alarmas creadas
+        ArrayList<PendingIntent> listaPendingIntent = new ArrayList<>();
+
+        ArrayList<Medicamento> listaAlarmasGuardadas;
+
+        listaAlarmasGuardadas = MedicamentoProveedor.readAllRecord(getContentResolver());
+
+        if (listaAlarmasGuardadas.size()>0){
+
+            for (int i = 0; i < listaAlarmasGuardadas.size(); i++){
+
+                int horaAlarm = listaAlarmasGuardadas.get(i).getHoraNum();
+                int minutoAlarm = listaAlarmasGuardadas.get(i).getMinuteNum();
 
             calendar.set(
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH),
-                    calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE)+i,
+                    horaAlarm,
+                    minutoAlarm,
                     0);
 
-            setAlarm(calendar.getTimeInMillis(), i);
+
+            if (calendar.getTimeInMillis()> (System.currentTimeMillis()+5000)){
+                Intent intent = new Intent (this, MyAlarm.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, intent, 0);
+
+                managerAlarm.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+                listaPendingIntent.add(pendingIntent);
+
+                Toast.makeText(this, "Ha entrado", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(this, "Alarma: "+horaAlarm+":"+minutoAlarm+ " activada.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "No ha entrado", Toast.LENGTH_SHORT).show();
+            }
+
+            }
+
+        } else {
+            Toast.makeText(this, "No hay alarmas pendientes", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    // Alarma que se activará cuando llegue la hora indicada
-    private void setAlarm(long timeInMillis, int numAlarma) {
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent (this, MyAlarm.class);
-        intent.setAction(""+numAlarma);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, numAlarma, intent, 0);
-        alarmManager.setRepeating(AlarmManager.RTC, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
-
-        Toast.makeText(this, "Alarmas del usuario activadas", Toast.LENGTH_SHORT).show();
-    }
 }

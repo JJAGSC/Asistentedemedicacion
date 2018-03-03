@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 public class Medicamento {
     private int ID;
     String nombre;
-    String hora;
+    String hora = "00:00";
     private Bitmap imagen;
 
     public Medicamento() {
@@ -63,5 +63,15 @@ public class Medicamento {
 
     public void setImagen(Bitmap imagen) {
         this.imagen = imagen;
+    }
+
+    public int getHoraNum (){
+
+        return Integer.parseInt(hora.substring(0,2));
+    }
+
+    public int getMinuteNum(){
+
+        return Integer.parseInt(hora.substring(3,5));
     }
 }

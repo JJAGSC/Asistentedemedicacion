@@ -28,7 +28,7 @@ public class MyAlarm extends BroadcastReceiver {
                 mediaPlayer.stop();
                 mediaPlayer.release();
             }
-        }, 10000);
+        }, 15000);
 
     }
 }
