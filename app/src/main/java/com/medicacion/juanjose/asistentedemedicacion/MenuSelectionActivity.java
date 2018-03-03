@@ -103,11 +103,7 @@ public class MenuSelectionActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(this, "Alarma: " + horaAlarm + ":" + minutoAlarm + " activada", Toast.LENGTH_SHORT).show();
                     }
-
-                } else {
-                    Toast.makeText(this, "No hay alarmas próximas en el tiempo", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
         } else {
