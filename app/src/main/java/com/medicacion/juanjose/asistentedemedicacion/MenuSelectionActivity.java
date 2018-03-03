@@ -99,9 +99,9 @@ public class MenuSelectionActivity extends AppCompatActivity {
                     listaPendingIntent.add(pendingIntent);
 
                     if (minutoAlarm<10){
-                        Toast.makeText(this, "Alarma: " + horaAlarm + ":0" + minutoAlarm + " activada", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Alarma " + horaAlarm + ":0" + minutoAlarm + " activada", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Alarma: " + horaAlarm + ":" + minutoAlarm + " activada", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Alarma " + horaAlarm + ":" + minutoAlarm + " activada", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
