@@ -49,7 +49,7 @@ public class MenuSelectionActivity extends AppCompatActivity {
         buttonClinic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), NearClinicMap.class);
+                Intent intent = new Intent(getApplicationContext(), UserNearClinicMap.class);
                 startActivity(intent);
             }
         });

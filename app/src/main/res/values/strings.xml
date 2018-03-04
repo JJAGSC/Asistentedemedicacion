@@ -33,5 +33,6 @@
     <string name="title_activity_manage_pictures">Gestionar Fotos</string>
     <string name="title_activity_clinics_map">Clínicas cercanas</string>
     <string name="title_activity_near_clinic_map">Clínicas cercanas</string>
+    <string name="title_activity_user_near_clinic_map">Map</string>
 
 </resources>

@@ -8,9 +8,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -23,13 +28,20 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.medicacion.juanjose.asistentedemedicacion.usernearclinicmap.GetNearbyPlacesData;
 
-public class NearClinicMap extends FragmentActivity implements OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener{
+import java.util.HashMap;
+import java.util.List;
+
+public class UserNearClinicMap extends FragmentActivity implements OnMapReadyCallback,
+GoogleApiClient.ConnectionCallbacks,
+GoogleApiClient.OnConnectionFailedListener,
+LocationListener{
 
     private GoogleMap mMap;
+    double latitude;
+    double longitude;
+    //private int PROXIMITY_RADIUS = 5000;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
@@ -38,17 +50,39 @@ public class NearClinicMap extends FragmentActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_near_clinic_map);
+        setContentView(R.layout.activity_user_near_clinic_map);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
+
+        //Check if Google Play Services Available or not
+        if (!CheckGooglePlayServices()) {
+            Log.d("onCreate", "Finishing test case since Google Play Services are not available");
+            finish();
+        }
+        else {
+            Log.d("onCreate","Google Play Services available.");
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
+    private boolean CheckGooglePlayServices() {
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(this);
+        if(result != ConnectionResult.SUCCESS) {
+            if(googleAPI.isUserResolvableError(result)) {
+                googleAPI.getErrorDialog(this, result,
+                        0).show();
+            }
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Manipulates the map once available.
@@ -77,6 +111,42 @@ public class NearClinicMap extends FragmentActivity implements OnMapReadyCallbac
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+        Button btnHospital = (Button) findViewById(R.id.btnHospitales);
+        btnHospital.setOnClickListener(new View.OnClickListener() {
+            String Hospital = "hospital";
+            @Override
+            public void onClick(View v) {
+                Log.d("onClick", "Botón hospital pulsado");
+                mMap.clear();
+                String url = getUrl(latitude, longitude, Hospital);
+                Object[] DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                Log.d("onClick", url);
+                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(DataTransfer);
+                Toast.makeText(UserNearClinicMap.this,"Hospitales cercanos", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Button btnAmbulatorio = (Button) findViewById(R.id.btnAmbulatorios);
+        btnAmbulatorio.setOnClickListener(new View.OnClickListener() {
+            String Ambulatorio = "centro+salud";
+            @Override
+            public void onClick(View v) {
+                Log.d("onClick", "Botón ambulatorio pulsado");
+                mMap.clear();
+                String url = getUrl(latitude, longitude, Ambulatorio);
+                Object[] DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                Log.d("onClick", url);
+                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(DataTransfer);
+                Toast.makeText(UserNearClinicMap.this,"Ambulatorios cercanos", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -90,7 +160,6 @@ public class NearClinicMap extends FragmentActivity implements OnMapReadyCallbac
 
     @Override
     public void onConnected(Bundle bundle) {
-
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
@@ -100,8 +169,32 @@ public class NearClinicMap extends FragmentActivity implements OnMapReadyCallbac
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
-
     }
+
+    private String getUrl(double latitude, double longitude, String nearbyPlace) {
+
+//        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+//        googlePlacesUrl.append("location=" + latitude + "," + longitude);
+//        googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
+//        googlePlacesUrl.append("&type=" + nearbyPlace);
+//        googlePlacesUrl.append("&sensor=true");
+//        googlePlacesUrl.append("&key=" + "AIzaSyAS9dNPix6K1tPuC44FA_hhao9FqEtmPVI");
+
+        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlacesUrl.append("name=" + nearbyPlace);
+        googlePlacesUrl.append("&rankby=distance");
+        googlePlacesUrl.append("&location=" + latitude + "," + longitude);
+        googlePlacesUrl.append("&language=ES&sensor=true");
+        googlePlacesUrl.append("&key=" + "AIzaSyAS9dNPix6K1tPuC44FA_hhao9FqEtmPVI");
+
+        Log.d("getUrl", googlePlacesUrl.toString());
+
+        return (googlePlacesUrl.toString());
+
+        // URL para hacer pruebas de la API
+        //return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?name=centro+salud&rankby=distance&location=28.098923,-15.472493&language=ES&sensor=true&key=AIzaSyAS9dNPix6K1tPuC44FA_hhao9FqEtmPVI";
+    }
+
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -110,6 +203,7 @@ public class NearClinicMap extends FragmentActivity implements OnMapReadyCallbac
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.d("onLocationChanged", "entered");
 
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
@@ -117,21 +211,28 @@ public class NearClinicMap extends FragmentActivity implements OnMapReadyCallbac
         }
 
         //Place current location marker
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("Posición actual");
+        markerOptions.title("Ubicación actual");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        Toast.makeText(UserNearClinicMap.this,"Ubicación actual", Toast.LENGTH_LONG).show();
+
+        Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
 
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            Log.d("onLocationChanged", "Removing Location Updates");
         }
+        Log.d("onLocationChanged", "Exit");
 
     }
 
@@ -196,7 +297,7 @@ public class NearClinicMap extends FragmentActivity implements OnMapReadyCallbac
                 } else {
 
                     // Permission denied, Disable the functionality that depends on this permission.
-                    Toast.makeText(this, "permiso denegado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
