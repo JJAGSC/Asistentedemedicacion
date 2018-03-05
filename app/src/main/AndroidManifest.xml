@@ -57,15 +57,6 @@
                 android:value=".MenuSelectionActivity" />
         </activity>
         <activity
-            android:name=".ClinicMap"
-            android:label="Clínica más cercana"
-            android:parentActivityName=".MenuSelectionActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuSelectionActivity" />
-        </activity>
-        <activity
             android:name=".BDMeds"
             android:label="@string/title_activity_bdmeds"
             android:parentActivityName=".MenuSelectionActivity"
@@ -165,13 +156,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".NearClinicMap"
-            android:label="@string/title_activity_clinics_map">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.medicacion.juanjose.asistentedemedicacion.MenuSelectionActivity" />
-        </activity>
         <activity
             android:name=".UserNearClinicMap"
             android:label="@string/title_activity_user_near_clinic_map">

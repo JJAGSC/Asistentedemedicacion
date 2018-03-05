@@ -1,15 +1,15 @@
 package com.medicacion.juanjose.asistentedemedicacion.authenticator;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
+        import android.app.Service;
+        import android.content.Intent;
+        import android.os.IBinder;
 
 /**
  * A bound Service that instantiates the authenticator
  * when started.
  */
 public class AuthenticatorService extends Service {
-   
+
     // Instance field that stores the authenticator object
     private Authenticator mAuthenticator;
     @Override

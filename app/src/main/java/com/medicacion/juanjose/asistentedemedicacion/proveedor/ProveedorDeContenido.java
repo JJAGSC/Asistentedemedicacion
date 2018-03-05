@@ -28,7 +28,7 @@ public class ProveedorDeContenido extends ContentProvider {
     private SQLiteDatabase sqlDB;
     public DatabaseHelper dbHelper;
     private static final String DATABASE_NAME = "Medicamentos.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     private static final String MEDICAMENTO_TABLE_NAME = "Medicamento";
     private static final String BITACORA_TABLE_NAME = "Bitacora";
@@ -148,14 +148,14 @@ public class ProveedorDeContenido extends ContentProvider {
         // Se ha comentado la línea que inicializa los datos, para no tener que crear su bitácora, hacer en un futuro
         void inicializarDatos(SQLiteDatabase db){
 
-            db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.HORA + ") " +
-                    "VALUES (1,'Ibuprofeno','Granulado')");
-            db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.HORA + ") " +
-                    "VALUES (2,'Ibuprofeno','Comprimido')");
-            db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.HORA + ") " +
-                    "VALUES (3,'Aspirina','Comprimido')");
-            db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.HORA + ") " +
-                    "VALUES (4,'Nolotil','Inyectable')");
+//            db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.HORA + ") " +
+//                    "VALUES (1,'Ibuprofeno','Granulado')");
+//            db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.HORA + ") " +
+//                    "VALUES (2,'Ibuprofeno','Comprimido')");
+//            db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.HORA + ") " +
+//                    "VALUES (3,'Aspirina','Comprimido')");
+//            db.execSQL("INSERT INTO " + MEDICAMENTO_TABLE_NAME + " (" +  Contrato.Medicamento._ID + "," + Contrato.Medicamento.NOMBRE + "," + Contrato.Medicamento.HORA + ") " +
+//                    "VALUES (4,'Nolotil','Inyectable')");
         }
 
         @Override
