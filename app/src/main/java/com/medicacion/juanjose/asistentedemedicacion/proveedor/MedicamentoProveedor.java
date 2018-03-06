@@ -154,6 +154,7 @@ public class MedicamentoProveedor {
             medicamentos.add(medicamento);
         }
 
+        cursor.close();
         return medicamentos;
     }
 }

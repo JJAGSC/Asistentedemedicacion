@@ -111,6 +111,7 @@ public class BitacoraProveedorUsuario {
             bitacoraUsuarios.add(bitacoraUsuario);
         }
 
+        cursor.close();
         return bitacoraUsuarios;
     }
 }

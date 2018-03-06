@@ -131,6 +131,15 @@ public class UsuarioProveedor {
     }
 
     public static ArrayList<Usuario> readAllRecord(ContentResolver resolver){
+
+
+        try {
+            Cursor cursor = null;
+        } catch (Exception e) {
+
+        }
+
+
         Uri uri = ContratoUsuario.Usuario.CONTENT_URI;
 
         String[] projection = {
@@ -153,6 +162,8 @@ public class UsuarioProveedor {
 
             usuarios.add(usuario);
         }
+
+        cursor.close();
 
         return usuarios;
     }

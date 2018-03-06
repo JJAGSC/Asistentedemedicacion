@@ -31,13 +31,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         etNameReg = (EditText) findViewById(R.id.etNameReg);
         etPassReg = (EditText) findViewById(R.id.etPassReg);
-        //etPassRegRep = (EditText) findViewById(R.id.etPassReg);
+        etPassRegRep = (EditText) findViewById(R.id.etPassRegRep);
 
         Button registrarUsuario = (Button) findViewById(R.id.btnRegisterUser);
-
-        // Obtenemos los usuarios que hay en la base de datos almacenados
-        Sincronizacion.recibirActualizacionesDelServidorUsuario();
-
 
         // Código para hacer pruebas y ver cuantos usuarios hay
         /*ArrayList<Usuario> listaUsuariosGuardados;
@@ -57,70 +53,113 @@ public class RegisterActivity extends AppCompatActivity {
         registrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //validar();
 
-                Log.d("prueba", "Entra al hacer click en el botón registrar usuario");
+                if (validarCampos()) {
 
-                Usuario usuario = new Usuario(etNameReg.getText().toString(), etPassReg.getText().toString());
+                    crearUsuario();
 
-                // Guardamos el usuario en la base de datos local
-                usuario.setID(G.SIN_VALOR_INT);
-                UsuarioProveedor.insertRecordConBitacora(getContentResolver(), usuario, getApplicationContext());
+                } else {
 
-                ArrayList<Usuario> listaUsuariosGuardados;
-
-                listaUsuariosGuardados = UsuarioProveedor.readAllRecord(getContentResolver());
-
-                if (listaUsuariosGuardados.size() > 0) {
-
-                    for (int i = 0; i < listaUsuariosGuardados.size(); i++) {
-
-                        String nombreUsuario = listaUsuariosGuardados.get(i).getNombre();
-                        String passwordUsuario = listaUsuariosGuardados.get(i).getPassword();
-
-
-                        Toast.makeText(getApplicationContext(), nombreUsuario+" "+passwordUsuario, Toast.LENGTH_SHORT).show();
-
-                    }
+                    Toast.makeText(getApplicationContext(), "Error al intentar crear el usuario. Datos incorrectos", Toast.LENGTH_LONG).show();
                 }
 
-                // Al crear el usuario, enviamos la actualización al servidor remoto
-                Sincronizacion.enviarActualizacionesAlServidorUsuario();
             }
         });
     }
 
-    private void validar(){
+    private boolean validarCampos() {
 
         boolean datosCorrectos = true;
 
         etNameReg.setError(null);
         etPassReg.setError(null);
+        etPassRegRep.setError(null);
 
         String userName = etNameReg.getText().toString();
-        String userPass = etPassReg.getText().toString();
+        String userPassReg = etPassReg.getText().toString();
+        String userPassRegRep = etPassRegRep.getText().toString();
 
+        // Comprobamos que los campos no estén vacíos
         if (TextUtils.isEmpty(userName)) {
             etNameReg.setError(getString(R.string.error_campo_obligatorio));
             etNameReg.requestFocus();
             datosCorrectos = false;
         }
 
-        if (TextUtils.isEmpty(userPass)) {
+        if (TextUtils.isEmpty(userPassReg)) {
             etPassReg.setError(getString(R.string.error_campo_obligatorio));
             etPassReg.requestFocus();
             datosCorrectos = false;
         }
 
-
-        if (datosCorrectos){
-            Toast.makeText(getApplicationContext(), "¡Usuario creado con éxito! (modo test, el usuario " +
-                    "no es funcional todavía)", Toast.LENGTH_LONG).show();
-
-        } else {
-            Toast.makeText(getApplicationContext(), "No se ha podido crear el usuario, faltan datos " +
-                    "o no son correctos", Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(userPassRegRep)) {
+            etPassRegRep.setError(getString(R.string.error_campo_obligatorio));
+            etPassRegRep.requestFocus();
+            datosCorrectos = false;
         }
 
+        if (!datosCorrectos) {
+            return false;
+        }
+
+        // Comprobamos que la contraseña sea igual en los dos campos
+
+        if (!userPassReg.equals(userPassRegRep)) {
+
+            etPassReg.setError(getString(R.string.error_password_distinto));
+            etPassRegRep.setError(getString(R.string.error_password_distinto));
+            etPassReg.requestFocus();
+
+            datosCorrectos = false;
+        }
+
+        return datosCorrectos;
+    }
+
+    private void crearUsuario() {
+
+        Log.d("prueba", "Registrar usuario");
+
+        String nombreUsuario = etNameReg.getText().toString();
+
+        // Comprobamos si el usuario existe en la base de datos
+        if (!comprobarSiExisteUsuario()){
+
+            Usuario usuario = new Usuario(etNameReg.getText().toString(), etPassReg.getText().toString());
+
+            // Si no existe el usuario, lo guardamos en la base de datos local
+            usuario.setID(G.SIN_VALOR_INT);
+            UsuarioProveedor.insertRecordConBitacora(getContentResolver(), usuario, getApplicationContext());
+
+            Toast.makeText(getApplicationContext(), "¡Usuario "+nombreUsuario+" creado con éxito!", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(getApplicationContext(), "No se ha podido crear. Ya existe un usuario con ese nombre.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private boolean comprobarSiExisteUsuario() {
+
+        String userNameIntroducido;
+        String nombreUsuarioRecibido = "";
+
+        userNameIntroducido = etNameReg.getText().toString();
+
+        ArrayList<Usuario> listaUsuariosGuardados;
+        listaUsuariosGuardados = UsuarioProveedor.readAllRecord(getContentResolver());
+
+        if (listaUsuariosGuardados.size() > 0) {
+            for (int i = 0; i < listaUsuariosGuardados.size(); i++) {
+                nombreUsuarioRecibido = listaUsuariosGuardados.get(i).getNombre();
+
+                // Comprobamos si ya existe el usuario en la base de datos
+                if (nombreUsuarioRecibido.equals(userNameIntroducido)){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

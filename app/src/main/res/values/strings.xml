@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Asistente de medicación</string>
     <!--login_main -->
-    <string name="nombre">Nombre</string>
+    <string name="nombre">Nombre de usuario</string>
 
     <string name="error_campo_obligatorio">Campo obligatorio</string>
-    <string name="error_edad">¡Edad incorrecta! (Valor entre 1 y 110)</string>
-    <string name="error_codigo_postal">¡CP incorrecto! (Valor entre 1 y 10)</string>
+    <string name="error_password_distinto">No coinciden las contraseñas</string>
+    <string name="usuario_no_encontrado">Usuario no encontrado</string>
+    <string name="password_incorrecto">Contraseña incorrecta</string>
 
     <string name="title_activity_menu">Menú principal</string>
 

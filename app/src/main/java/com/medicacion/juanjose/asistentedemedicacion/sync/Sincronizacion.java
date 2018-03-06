@@ -54,9 +54,9 @@ public class Sincronizacion {
 
         if(G.VERSION_ADMINISTRADOR){
             enviarActualizacionesAlServidor();
-            //enviarActualizacionesAlServidorUsuario(); // no hace falta ya que las envía cada vez que crea un usuario
+            enviarActualizacionesAlServidorUsuario();
             recibirActualizacionesDelServidor();
-            //recibirActualizacionesDelServidorUsuario();
+            recibirActualizacionesDelServidorUsuario();
         } else {
             recibirActualizacionesDelServidor();
         }

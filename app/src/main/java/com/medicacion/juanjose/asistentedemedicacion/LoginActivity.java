@@ -15,6 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.medicacion.juanjose.asistentedemedicacion.pojos.Usuario;
+import com.medicacion.juanjose.asistentedemedicacion.proveedor.UsuarioProveedor;
+
+import java.util.ArrayList;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText etNameR;
@@ -31,14 +36,27 @@ public class LoginActivity extends AppCompatActivity {
         etNameR = (EditText) findViewById(R.id.etName);
         etPassR = (EditText) findViewById(R.id.etPassw);
 
+        // Se comprueba si los datos son correctos antes de hacer el login
         Button btnEnter = (Button) findViewById(R.id.btnEntrar);
         btnEnter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                validar();
+
+                // Comprobamos si los datos de las casillas de texto son correctos
+                if (validarDatosCasillas()){
+
+                    // Si los datos son válidos comprobamos si existe el usuario
+                    if(comprobarUsuario()){
+                        Intent abrirVentanaMenu = new Intent(context, MenuSelectionActivity.class);
+                        startActivity(abrirVentanaMenu);
+                    }
+
+                }
+
             }
         });
 
+        // Permite al usuario registrarse con un nombre de usuario y una contraseña
         Button botonRegistrar = (Button) findViewById(R.id.btnRegister);
         botonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Permite realizar una llamada al 112, número de emergencia
         ImageView botonEmergencia = (ImageView) findViewById(R.id.imgEmergency);
         botonEmergencia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +81,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void validar() {
+    private boolean validarDatosCasillas() {
+
+        boolean datosCorrectos = true;
+
         etNameR.setError(null);
         etPassR.setError(null);
 
@@ -72,27 +94,64 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(userName)) {
             etNameR.setError(getString(R.string.error_campo_obligatorio));
             etNameR.requestFocus();
-            return;
+            datosCorrectos = false;
         }
 
         if (TextUtils.isEmpty(userPass)) {
             etPassR.setError(getString(R.string.error_campo_obligatorio));
             etPassR.requestFocus();
-            return;
+            datosCorrectos = false;
         }
 
-        if (!userName.equalsIgnoreCase("antonio")) {
-            etNameR.setError("Nombre no válido");
-            etNameR.requestFocus();
-            return;
-        } else {
-            if (userPass.equalsIgnoreCase("1234")) {
-                Intent abrirVentanaMenu = new Intent(context, MenuSelectionActivity.class);
-                startActivity(abrirVentanaMenu);
+        return datosCorrectos;
+    }
 
-            } else {
-                Toast.makeText(getApplicationContext(), "La contraseña no es correcta", Toast.LENGTH_SHORT).show();
+    private boolean comprobarUsuario() {
+
+        String userNameIntroducido;
+        String passIntroducida;
+        String nombreUsuarioRecibido = "";
+        String passUsuarioRecibida = "";
+
+        boolean usuarioEncontrado = false;
+
+        userNameIntroducido = etNameR.getText().toString();
+        passIntroducida = etPassR.getText().toString();
+
+        ArrayList<Usuario> listaUsuariosGuardados;
+        listaUsuariosGuardados = UsuarioProveedor.readAllRecord(getContentResolver());
+
+        if (listaUsuariosGuardados.size() > 0) {
+            for (int i = 0; i < listaUsuariosGuardados.size(); i++) {
+                nombreUsuarioRecibido = listaUsuariosGuardados.get(i).getNombre();
+                passUsuarioRecibida = listaUsuariosGuardados.get(i).getPassword();
+
+                // Comprobamos si existe el usuario en la base de datos
+                if (nombreUsuarioRecibido.equals(userNameIntroducido)){
+
+                    usuarioEncontrado = true;
+
+                    // Comprobamos si la contraseña es correcta
+                    if (passUsuarioRecibida.equals(passIntroducida)){
+
+                        Toast.makeText(getApplicationContext(), "¡Datos correctos!", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                }
             }
         }
+
+        // Si no se encuentra el usuario, lo indicamos
+        if (!usuarioEncontrado){
+            etNameR.setError(getString(R.string.usuario_no_encontrado));
+            etNameR.requestFocus();
+
+        } else {
+            // Si lo encontramos pero la contraseña no es correcta, lo indicamos
+            etPassR.setError(getString(R.string.password_incorrecto));
+            etPassR.requestFocus();
+        }
+
+        return false;
     }
 }
