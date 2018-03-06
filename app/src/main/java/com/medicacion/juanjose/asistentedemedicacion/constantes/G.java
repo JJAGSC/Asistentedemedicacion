@@ -7,6 +7,8 @@ package com.medicacion.juanjose.asistentedemedicacion.constantes;
 public class G {
 
     public static final String RUTA_SERVIDOR = "http://192.168.1.31:8080/Medicamentos/webresources";
+    //public static final String RUTA_SERVIDOR = "http://81.61.76.185:8080/Medicamentos/webresources"; // no funciona
+
     public static final int SYNC_INTERVAL = 60; // Se puede poner mínimo 60 segundos
     public static final boolean VERSION_ADMINISTRADOR = true;
     public static final int SIN_VALOR_INT = -1;

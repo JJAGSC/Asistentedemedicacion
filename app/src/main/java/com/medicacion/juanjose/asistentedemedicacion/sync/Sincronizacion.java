@@ -6,10 +6,15 @@ import android.util.Log;
 
 import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Bitacora;
+import com.medicacion.juanjose.asistentedemedicacion.pojos.BitacoraUsuario;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
+import com.medicacion.juanjose.asistentedemedicacion.pojos.Usuario;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.BitacoraProveedor;
+import com.medicacion.juanjose.asistentedemedicacion.proveedor.BitacoraProveedorUsuario;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
+import com.medicacion.juanjose.asistentedemedicacion.proveedor.UsuarioProveedor;
 import com.medicacion.juanjose.asistentedemedicacion.volley.MedicamentoVolley;
+import com.medicacion.juanjose.asistentedemedicacion.volley.UsuarioVolley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,16 +51,13 @@ public class Sincronizacion {
             return true;
         }
 
-        enviarActualizacionesAlServidor();
-        recibirActualizacionesDelServidor();
-
-
-//        if(G.VERSION_ADMINISTRADOR){
-//            enviarActualizacionesAlServidor();
-//            recibirActualizacionesDelServidor();
-//        } else {
-//            recibirActualizacionesDelServidor();
-//        }
+        if(G.VERSION_ADMINISTRADOR){
+            enviarActualizacionesAlServidor();
+            //enviarActualizacionesAlServidorUsuario();
+            recibirActualizacionesDelServidor();
+        } else {
+            recibirActualizacionesDelServidor();
+        }
 
         return true;
     }
@@ -84,6 +86,36 @@ public class Sincronizacion {
                     break;
                 case G.OPERACION_BORRAR:
                     MedicamentoVolley.delMedicamento(bitacora.getID_Medicamento(), true, bitacora.getID());
+                    break;
+            }
+            Log.i("sincronizacion", "acabo de enviar");
+        }
+    }
+
+    public static void enviarActualizacionesAlServidorUsuario() {
+        ArrayList<BitacoraUsuario> registrosBitacoraProveedor = BitacoraProveedorUsuario.readAllRecord(resolvedor);
+        for (BitacoraUsuario bitacoraUsuario : registrosBitacoraProveedor) {
+
+            switch (bitacoraUsuario.getOperacion()) {
+                case G.OPERACION_INSERTAR:
+                    Usuario usuario = null;
+                    try {
+                        usuario = UsuarioProveedor.readRecord(resolvedor, bitacoraUsuario.getID_Usuario());
+                        UsuarioVolley.addUsuario(usuario, true, bitacoraUsuario.getID());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case G.OPERACION_MODIFICAR:
+                    try {
+                        usuario = UsuarioProveedor.readRecord(resolvedor, bitacoraUsuario.getID_Usuario());
+                        UsuarioVolley.updateUsuario(usuario, true, bitacoraUsuario.getID());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case G.OPERACION_BORRAR:
+                    UsuarioVolley.delUsuario(bitacoraUsuario.getID_Usuario(), true, bitacoraUsuario.getID());
                     break;
             }
             Log.i("sincronizacion", "acabo de enviar");
@@ -134,6 +166,7 @@ public class Sincronizacion {
                     }
                 }
             }
+
 
             //MedicamentoVolley.getAllMedicamento(); //Los baja y los guarda en SQLite
         } catch (Exception e) {

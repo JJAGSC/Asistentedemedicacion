@@ -1,6 +1,6 @@
 package com.medicacion.asistente.bd;
 
-import com.medicacion.asistente.pojos.Medicamento;
+import com.medicacion.asistente.pojos.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
  *
  * @author Juanjo
  */
-public class MedicamentoBD {
-    public static ArrayList<Medicamento> getAllMedicamentos() throws Exception{
+public class UsuarioBD {
+    public static ArrayList<Usuario> getAllUsuarios() throws Exception{
         
         Connection conexion = null;
         PreparedStatement ps = null;
@@ -20,21 +20,21 @@ public class MedicamentoBD {
         try {
             
             conexion = ConexionBD.getConexion();
-            ArrayList<Medicamento> medicamentos = new ArrayList<>(); 
-            Medicamento medicamento;
+            ArrayList<Usuario> usuarios = new ArrayList<>(); 
+            Usuario usuario;
             
-            ps = conexion.prepareStatement("SELECT * FROM medicamento;");
+            ps = conexion.prepareStatement("SELECT * FROM usuario;");
             
             rs = ps.executeQuery();
             
             while(rs.next()){
                 
-                medicamento = new Medicamento(rs.getInt("PK_ID"), rs.getString("nombre"), rs.getString("hora"));
+                usuario = new Usuario(rs.getInt("PK_ID"), rs.getString("nombre"), rs.getString("password"));
                 
-                medicamentos.add(medicamento);  
+                usuarios.add(usuario);  
             }
             
-            return medicamentos;
+            return usuarios;
             
         } catch (Exception ex) {
             throw(ex);
@@ -45,7 +45,7 @@ public class MedicamentoBD {
         }
     }
     
-    static public Medicamento getMedicamento(int id) throws Exception {
+    static public Usuario getUsuario(int id) throws Exception {
        
         Connection conexion = null;
         PreparedStatement ps = null;
@@ -53,15 +53,15 @@ public class MedicamentoBD {
         
         try {
             conexion = ConexionBD.getConexion();
-            ps = conexion.prepareStatement("SELECT * FROM medicamento WHERE PK_ID = " + id);
+            ps = conexion.prepareStatement("SELECT * FROM usuario WHERE PK_ID = " + id);
             rs = ps.executeQuery();
             
             while (rs.next()) {
-                Medicamento registro = new Medicamento();
+                Usuario registro = new Usuario();
 
                 registro.setPK_ID(rs.getInt("PK_ID"));
                 registro.setNombre(rs.getString("nombre"));
-                registro.setHora(rs.getString("hora"));
+                registro.setPassword(rs.getString("password"));
 
                 return registro;
             }
@@ -75,7 +75,7 @@ public class MedicamentoBD {
         return null;
     }
 
-    static public void addMedicamento(Medicamento registro) throws Exception {
+    static public void addUsuario(Usuario registro) throws Exception {
 
         Connection conexion = null;
         PreparedStatement ps = null;
@@ -87,11 +87,11 @@ public class MedicamentoBD {
             String str;
             
             if (registro.getPK_ID() != -1) {
-                str = "INSERT INTO medicamento (PK_ID, nombre, hora) VALUES ("
-                        + registro.getPK_ID() + ",'" + registro.getNombre() + "','" + registro.getHora()+ "')";
+                str = "INSERT INTO usuario (PK_ID, nombre, password) VALUES ("
+                        + registro.getPK_ID() + ",'" + registro.getNombre() + "','" + registro.getPassword()+ "')";
             } else {
-                str = "INSERT INTO medicamento (nombre, hora) VALUES ("
-                        + "'" + registro.getNombre() + "','" + registro.getHora()+ "')";
+                str = "INSERT INTO usuario (nombre, password) VALUES ("
+                        + "'" + registro.getNombre() + "','" + registro.getPassword()+ "')";
             }
 
             ps = conexion.prepareStatement(str);
@@ -106,14 +106,14 @@ public class MedicamentoBD {
         }
     }
 
-    static public void delMedicamento(int id) throws Exception {
+    static public void delUsuario(int id) throws Exception {
         Connection conexion = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         
         try {
             conexion = ConexionBD.getConexion();
-            ps = conexion.prepareStatement("DELETE FROM medicamento WHERE PK_ID = " + id + "");
+            ps = conexion.prepareStatement("DELETE FROM usuario WHERE PK_ID = " + id + "");
 
             ps.executeUpdate();
 
@@ -126,7 +126,7 @@ public class MedicamentoBD {
         }
     }
 
-    static public void updateMedicamento(Medicamento registro) throws Exception {
+    static public void updateUsuario(Usuario registro) throws Exception {
         Connection conexion = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -134,8 +134,8 @@ public class MedicamentoBD {
         try {
             conexion = ConexionBD.getConexion();
             
-            String str = "UPDATE medicamento SET nombre = '" + registro.getNombre() + "'"
-                    + ", hora = '" + registro.getHora()+ "'"
+            String str = "UPDATE usuario SET nombre = '" + registro.getNombre() + "'"
+                    + ", password = '" + registro.getPassword()+ "'"
                     + " WHERE PK_ID = " + registro.getPK_ID();
             ps = conexion.prepareStatement(str);
 

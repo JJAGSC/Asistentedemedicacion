@@ -14,6 +14,7 @@ import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Usuario;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.UsuarioProveedor;
+import com.medicacion.juanjose.asistentedemedicacion.sync.Sincronizacion;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 Usuario usuario = new Usuario(etNameReg.getText().toString(), etPassReg.getText().toString());
 
+                // Guardamos el usuario en la base de datos local
                 usuario.setID(G.SIN_VALOR_INT);
                 UsuarioProveedor.insertRecordConBitacora(getContentResolver(), usuario, getApplicationContext());
 
@@ -59,6 +61,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                         Toast.makeText(getApplicationContext(), nombreUsuario+" "+passwordUsuario, Toast.LENGTH_SHORT).show();
+
+
+                        // Al crear un usuario, enviamos la actualización al servidor remoto
+                        Sincronizacion.enviarActualizacionesAlServidorUsuario();
                     }
                 }
             }

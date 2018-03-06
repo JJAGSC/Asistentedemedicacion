@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.medicacion.asistente.rest.MedicamentosResource.class);
+        resources.add(com.medicacion.asistente.rest.UsuariosResource.class);
     }
     
 }

@@ -7,19 +7,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Juanjo
  */
 @XmlRootElement
-public class Medicamento {
+public class Usuario {
     
     public int PK_ID;
     String nombre;
-    String hora;
+    String password;
 
-    public Medicamento() {
+    public Usuario() {
     }
 
-    public Medicamento(int PK_ID, String nombre, String hora) {
+    public Usuario(int PK_ID, String nombre, String password) {
         this.PK_ID = PK_ID;
         this.nombre = nombre;
-        this.hora = hora;
+        this.password = password;
     }
 
     public int getPK_ID() {
@@ -38,12 +38,12 @@ public class Medicamento {
         this.nombre = nombre;
     }
 
-    public String getHora() {
-        return hora;
+    public String getPassword() {
+        return password;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

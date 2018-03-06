@@ -69,7 +69,7 @@ public class UsuarioVolley {
         try {
             jsonObject.put("PK_ID", usuario.getID());
             jsonObject.put("nombre", usuario.getNombre());
-            jsonObject.put("hora", usuario.getPassword());
+            jsonObject.put("password", usuario.getPassword());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -109,7 +109,7 @@ public class UsuarioVolley {
         try {
             jsonObject.put("PK_ID", usuario.getID());
             jsonObject.put("nombre", usuario.getNombre());
-            jsonObject.put("hora", usuario.getPassword());
+            jsonObject.put("password", usuario.getPassword());
         } catch (JSONException e) {
             e.printStackTrace();
         }
