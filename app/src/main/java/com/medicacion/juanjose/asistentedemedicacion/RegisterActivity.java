@@ -3,10 +3,19 @@ package com.medicacion.juanjose.asistentedemedicacion;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
+import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
+import com.medicacion.juanjose.asistentedemedicacion.pojos.Usuario;
+import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
+import com.medicacion.juanjose.asistentedemedicacion.proveedor.UsuarioProveedor;
+
+import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -21,14 +30,37 @@ public class RegisterActivity extends AppCompatActivity {
 
         etNameReg = (EditText) findViewById(R.id.etNameReg);
         etPassReg = (EditText) findViewById(R.id.etPassReg);
-        etPassRegRep = (EditText) findViewById(R.id.etPassReg);
+        //etPassRegRep = (EditText) findViewById(R.id.etPassReg);
 
         Button registrarUsuario = (Button) findViewById(R.id.btnRegisterUser);
 
         registrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validar();
+                //validar();
+
+                Log.d("prueba", "Entra al hacer click en el botón registrar usuario");
+
+                Usuario usuario = new Usuario(etNameReg.getText().toString(), etPassReg.getText().toString());
+
+                usuario.setID(G.SIN_VALOR_INT);
+                UsuarioProveedor.insertRecordConBitacora(getContentResolver(), usuario, getApplicationContext());
+
+                ArrayList<Usuario> listaUsuariosGuardados;
+
+                listaUsuariosGuardados = UsuarioProveedor.readAllRecord(getContentResolver());
+
+                if (listaUsuariosGuardados.size() > 0) {
+
+                    for (int i = 0; i < listaUsuariosGuardados.size(); i++) {
+
+                        String nombreUsuario = listaUsuariosGuardados.get(i).getNombre();
+                        String passwordUsuario = listaUsuariosGuardados.get(i).getPassword();
+
+
+                        Toast.makeText(getApplicationContext(), nombreUsuario+" "+passwordUsuario, Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }

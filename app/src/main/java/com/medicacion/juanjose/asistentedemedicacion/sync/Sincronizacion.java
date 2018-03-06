@@ -46,12 +46,16 @@ public class Sincronizacion {
             return true;
         }
 
-        if(G.VERSION_ADMINISTRADOR){
-            enviarActualizacionesAlServidor();
-            recibirActualizacionesDelServidor();
-        } else {
-            recibirActualizacionesDelServidor();
-        }
+        enviarActualizacionesAlServidor();
+        recibirActualizacionesDelServidor();
+
+
+//        if(G.VERSION_ADMINISTRADOR){
+//            enviarActualizacionesAlServidor();
+//            recibirActualizacionesDelServidor();
+//        } else {
+//            recibirActualizacionesDelServidor();
+//        }
 
         return true;
     }

@@ -97,6 +97,12 @@
             android:enabled="true"
             android:exported="true" />
 
+        <provider
+            android:name=".proveedor.ProveedorDeContenidoUsuario"
+            android:authorities="com.medicacion.juanjose.asistentedemedicacion.proveedor.ProveedorDeContenidoUsuario"
+            android:enabled="true"
+            android:exported="true" />
+
         <service
             android:name=".authenticator.AuthenticatorService"
             android:exported="false">
