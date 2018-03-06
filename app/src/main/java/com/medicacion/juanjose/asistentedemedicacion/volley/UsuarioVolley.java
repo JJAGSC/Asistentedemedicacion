@@ -44,7 +44,7 @@ public class UsuarioVolley {
                     public void onResponse(JSONArray response) {
                         // display response
                         //Log.d("Response", response.toString());
-                        Sincronizacion.realizarActualizacionesDelServidorUnaVezRecibidas(response);
+                        Sincronizacion.realizarActualizacionesDelServidorUnaVezRecibidasUsuario(response);
                         AppController.getInstance().getSincronizacion().setEsperandoRespuestaDeServidor(false);
                     }
                 },

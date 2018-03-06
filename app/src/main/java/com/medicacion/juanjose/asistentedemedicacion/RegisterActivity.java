@@ -35,6 +35,25 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button registrarUsuario = (Button) findViewById(R.id.btnRegisterUser);
 
+        // Obtenemos los usuarios que hay en la base de datos almacenados
+        Sincronizacion.recibirActualizacionesDelServidorUsuario();
+
+
+        // Código para hacer pruebas y ver cuantos usuarios hay
+        /*ArrayList<Usuario> listaUsuariosGuardados;
+        listaUsuariosGuardados = UsuarioProveedor.readAllRecord(getContentResolver());
+
+        if (listaUsuariosGuardados.size() > 0) {
+
+            for (int i = 0; i < listaUsuariosGuardados.size(); i++) {
+
+                String nombreUsuario = listaUsuariosGuardados.get(i).getNombre();
+                String passwordUsuario = listaUsuariosGuardados.get(i).getPassword();
+
+                Toast.makeText(getApplicationContext(), nombreUsuario+" "+passwordUsuario, Toast.LENGTH_SHORT).show();
+            }
+        }*/
+
         registrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,11 +81,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), nombreUsuario+" "+passwordUsuario, Toast.LENGTH_SHORT).show();
 
-
-                        // Al crear un usuario, enviamos la actualización al servidor remoto
-                        Sincronizacion.enviarActualizacionesAlServidorUsuario();
                     }
                 }
+
+                // Al crear el usuario, enviamos la actualización al servidor remoto
+                Sincronizacion.enviarActualizacionesAlServidorUsuario();
             }
         });
     }

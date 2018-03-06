@@ -34,6 +34,7 @@ public class Sincronizacion {
         this.resolvedor = contexto.getContentResolver();
         this.contexto = contexto;
         recibirActualizacionesDelServidor(); //La primera vez se cargan los datos siempre
+        recibirActualizacionesDelServidorUsuario();
     }
 
     public synchronized static boolean isEsperandoRespuestaDeServidor() {
@@ -53,8 +54,9 @@ public class Sincronizacion {
 
         if(G.VERSION_ADMINISTRADOR){
             enviarActualizacionesAlServidor();
-            //enviarActualizacionesAlServidorUsuario();
+            //enviarActualizacionesAlServidorUsuario(); // no hace falta ya que las envía cada vez que crea un usuario
             recibirActualizacionesDelServidor();
+            //recibirActualizacionesDelServidorUsuario();
         } else {
             recibirActualizacionesDelServidor();
         }
@@ -122,10 +124,17 @@ public class Sincronizacion {
         }
     }
 
+    // Medicamentos
     private static void recibirActualizacionesDelServidor(){
         MedicamentoVolley.getAllMedicamento();
     }
 
+    // Usuarios
+    public static void recibirActualizacionesDelServidorUsuario(){
+        UsuarioVolley.getAllUsuario();
+    }
+
+    // Medicamentos
     public static void realizarActualizacionesDelServidorUnaVezRecibidas(JSONArray jsonArray){
         Log.i("sincronizacion", "recibirActualizacionesDelServidor");
 
@@ -168,7 +177,56 @@ public class Sincronizacion {
             }
 
 
+
             //MedicamentoVolley.getAllMedicamento(); //Los baja y los guarda en SQLite
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Usuarios
+    public static void realizarActualizacionesDelServidorUnaVezRecibidasUsuario(JSONArray jsonArray){
+        Log.i("sincronizacion", "recibirActualizacionesDelServidor");
+
+        try {
+            ArrayList<Integer> identificadoresDeRegistrosActualizados = new ArrayList<Integer>();
+            ArrayList<Usuario> registrosNuevos = new ArrayList<>();
+            ArrayList<Usuario> registrosViejos = UsuarioProveedor.readAllRecord(resolvedor);
+            ArrayList<Integer> identificadoresDeRegistrosViejos = new ArrayList<Integer>();
+            for(Usuario i : registrosViejos) identificadoresDeRegistrosViejos.add(i.getID());
+
+            JSONObject obj = null;
+            for (int i = 0; i < jsonArray.length(); i++ ){
+                obj = jsonArray.getJSONObject(i);
+                registrosNuevos.add(new Usuario(obj.getInt("PK_ID"), obj.getString("nombre"), obj.getString("password")));
+            }
+
+            for(Usuario usuario: registrosNuevos) {
+                try {
+                    if(identificadoresDeRegistrosViejos.contains(usuario.getID())) {
+                        UsuarioProveedor.updateRecord(resolvedor, usuario, null);
+                    } else {
+                        UsuarioProveedor.insertRecord(resolvedor, usuario, null);
+                    }
+                    identificadoresDeRegistrosActualizados.add(usuario.getID());
+                } catch (Exception e){
+                    Log.i("sincronizacion",
+                            "Probablemente el registro ya existía en la BD."+"" +
+                                    " Esto se podría controlar mejor con una Bitácora.");
+                }
+            }
+
+            for(Usuario usuario: registrosViejos){
+                if(!identificadoresDeRegistrosActualizados.contains(usuario.getID())){
+                    try {
+                        UsuarioProveedor.deleteRecord(resolvedor, usuario.getID());
+                    }catch(Exception e){
+                        Log.i("sincronizacion", "Error al borrar el registro con id:" + usuario.getID());
+                    }
+                }
+            }
+
+            //UsuarioVolley.getAllUsuario(); //Los baja y los guarda en SQLite
         } catch (Exception e) {
             e.printStackTrace();
         }
