@@ -28,7 +28,7 @@ public class ProveedorDeContenidoUsuario extends ContentProvider {
     private SQLiteDatabase sqlDB;
     public DatabaseHelper dbHelper;
     private static final String DATABASE_NAME = "Usuarios.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 10;
 
     private static final String USUARIO_TABLE_NAME = "Usuario";
     private static final String BITACORAUSUARIO_TABLE_NAME = "BitacoraUsuario";
