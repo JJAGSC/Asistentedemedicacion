@@ -154,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
                 nombreUsuarioRecibido = listaUsuariosGuardados.get(i).getNombre();
 
                 // Comprobamos si ya existe el usuario en la base de datos
-                if (nombreUsuarioRecibido.equals(userNameIntroducido)){
+                if (nombreUsuarioRecibido.equalsIgnoreCase(userNameIntroducido)){
                     return true;
                 }
             }

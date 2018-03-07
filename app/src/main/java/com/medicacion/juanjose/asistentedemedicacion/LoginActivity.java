@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etNameR;
     EditText etPassR;
     Activity context;
+    ArrayList<Usuario> listaUsuariosGuardados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Almacenamos los usuarios contenidos en la base de datos en el array para poder consultarlos
+        listaUsuariosGuardados = UsuarioProveedor.readAllRecord(getContentResolver());
+    }
+
     private void makeCall(String phoneNumber){
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null));
         startActivity(intent);
@@ -118,16 +126,13 @@ public class LoginActivity extends AppCompatActivity {
         userNameIntroducido = etNameR.getText().toString();
         passIntroducida = etPassR.getText().toString();
 
-        ArrayList<Usuario> listaUsuariosGuardados;
-        listaUsuariosGuardados = UsuarioProveedor.readAllRecord(getContentResolver());
-
         if (listaUsuariosGuardados.size() > 0) {
             for (int i = 0; i < listaUsuariosGuardados.size(); i++) {
                 nombreUsuarioRecibido = listaUsuariosGuardados.get(i).getNombre();
                 passUsuarioRecibida = listaUsuariosGuardados.get(i).getPassword();
 
                 // Comprobamos si existe el usuario en la base de datos
-                if (nombreUsuarioRecibido.equals(userNameIntroducido)){
+                if (nombreUsuarioRecibido.equalsIgnoreCase(userNameIntroducido)){
 
                     usuarioEncontrado = true;
 
