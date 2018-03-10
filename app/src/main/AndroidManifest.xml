@@ -95,13 +95,15 @@
             android:name=".proveedor.ProveedorDeContenido"
             android:authorities="com.medicacion.juanjose.asistentedemedicacion.proveedor.ProveedorDeContenido"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:syncable="true"/>
 
         <provider
             android:name=".proveedor.ProveedorDeContenidoUsuario"
             android:authorities="com.medicacion.juanjose.asistentedemedicacion.proveedor.ProveedorDeContenidoUsuario"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:syncable="true"/>
 
         <service
             android:name=".authenticator.AuthenticatorService"
