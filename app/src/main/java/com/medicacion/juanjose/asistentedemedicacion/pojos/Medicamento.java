@@ -11,26 +11,30 @@ public class Medicamento {
     String nombre;
     String hora = "00:00";
     private Bitmap imagen;
+    String usuarioalarma;
 
     public Medicamento() {
     }
 
-    public Medicamento(String nombre, String hora) {
+    public Medicamento(String nombre, String hora, String usuarioalarma) {
         this.nombre = nombre;
         this.hora = hora;
+        this.usuarioalarma = usuarioalarma;
     }
 
-    public Medicamento(int ID, String nombre, String hora) {
+    public Medicamento(int ID, String nombre, String hora, String usuarioalarma) {
         this.ID = ID;
         this.nombre = nombre;
         this.hora = hora;
+        this.usuarioalarma = usuarioalarma;
     }
 
-    public Medicamento(int ID, String nombre, String hora, Bitmap imagen) {
+    public Medicamento(int ID, String nombre, String hora, Bitmap imagen, String usuarioalarma) {
         this.ID = ID;
         this.nombre = nombre;
         this.hora = hora;
         this.imagen = imagen;
+        this.usuarioalarma = usuarioalarma;
     }
 
     public int getID() {
@@ -63,6 +67,14 @@ public class Medicamento {
 
     public void setImagen(Bitmap imagen) {
         this.imagen = imagen;
+    }
+
+    public String getUsuarioAlarma() {
+        return usuarioalarma;
+    }
+
+    public void setUsuarioAlarma(String usuarioalarma) {
+        this.usuarioalarma = usuarioalarma;
     }
 
     public int getHoraNum (){

@@ -28,7 +28,7 @@ public class ProveedorDeContenido extends ContentProvider {
     private SQLiteDatabase sqlDB;
     public DatabaseHelper dbHelper;
     private static final String DATABASE_NAME = "Medicamentos.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 13;
 
     private static final String MEDICAMENTO_TABLE_NAME = "Medicamento";
     private static final String BITACORA_TABLE_NAME = "Bitacora";
@@ -130,7 +130,8 @@ public class ProveedorDeContenido extends ContentProvider {
                             + MEDICAMENTO_TABLE_NAME
                             + "( _id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, "
                             + Contrato.Medicamento.NOMBRE + " TEXT , "
-                            + Contrato.Medicamento.HORA + " TEXT ); "
+                            + Contrato.Medicamento.HORA + " TEXT , "
+                            + Contrato.Medicamento.usuarioalarma + " TEXT ); "
             );
 
             db.execSQL("Create table "

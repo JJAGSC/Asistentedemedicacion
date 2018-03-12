@@ -3,13 +3,8 @@ package com.medicacion.juanjose.asistentedemedicacion;
 import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
-import com.medicacion.juanjose.asistentedemedicacion.sync.Sincronizacion;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -192,7 +187,7 @@ public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.O
                 break;
         }
 
-        medicamento = new Medicamento(String.valueOf(medName.getText()), String.format("%02d:%02d", hourOfDay, minute));
+        medicamento = new Medicamento(String.valueOf(medName.getText()), String.format("%02d:%02d", hourOfDay, minute), G.usuarioalarma);
         listaAlarmasMedicamento.add(medicamento);
     }
 

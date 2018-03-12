@@ -28,6 +28,7 @@ public class MedicamentoProveedor {
         ContentValues values = new ContentValues();
         values.put(Contrato.Medicamento.NOMBRE, medicamento.getNombre());
         values.put(Contrato.Medicamento.HORA, medicamento.getHora());
+        values.put(Contrato.Medicamento.usuarioalarma, medicamento.getUsuarioAlarma());
 
         Uri uriResultado = resolver.insert(uri, values);
 
@@ -83,6 +84,7 @@ public class MedicamentoProveedor {
         ContentValues values = new ContentValues();
         values.put(Contrato.Medicamento.NOMBRE, medicamento.getNombre());
         values.put(Contrato.Medicamento.HORA, medicamento.getHora());
+        values.put(Contrato.Medicamento.usuarioalarma, medicamento.getUsuarioAlarma());
 
         resolver.update (uri, values, null, null);
 
@@ -112,7 +114,8 @@ public class MedicamentoProveedor {
 
         String[] projection = {
                 Contrato.Medicamento.NOMBRE,
-                Contrato.Medicamento.HORA
+                Contrato.Medicamento.HORA,
+                Contrato.Medicamento.usuarioalarma
         };
 
         Cursor cursor = resolver.query (uri, projection, null, null, null);
@@ -123,6 +126,7 @@ public class MedicamentoProveedor {
             medicamento.setID(medicamentoID);
             medicamento.setNombre(cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.NOMBRE)));
             medicamento.setHora(cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.HORA)));
+            medicamento.setUsuarioAlarma(cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.usuarioalarma)));
 
             return medicamento;
         }
@@ -136,7 +140,8 @@ public class MedicamentoProveedor {
         String[] projection = {
                 Contrato.Medicamento._ID,
                 Contrato.Medicamento.NOMBRE,
-                Contrato.Medicamento.HORA
+                Contrato.Medicamento.HORA,
+                Contrato.Medicamento.usuarioalarma
         };
 
         Cursor cursor = resolver.query (uri, projection, null, null, null);
@@ -150,6 +155,7 @@ public class MedicamentoProveedor {
             medicamento.setID(cursor.getInt(cursor.getColumnIndex(Contrato.Medicamento._ID)));
             medicamento.setNombre(cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.NOMBRE)));
             medicamento.setHora(cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.HORA)));
+            medicamento.setUsuarioAlarma(cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.usuarioalarma)));
 
             medicamentos.add(medicamento);
         }

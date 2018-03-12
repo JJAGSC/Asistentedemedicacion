@@ -15,6 +15,7 @@ public class Contrato {
         // Table column
         public static final String NOMBRE = "Nombre";
         public static final String HORA = "Hora";
+        public static final String usuarioalarma = "usuarioalarma";
     }
 
     public static final class Bitacora implements BaseColumns {

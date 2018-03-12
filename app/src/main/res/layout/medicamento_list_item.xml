@@ -32,7 +32,13 @@
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:id="@+id/textview_medicamento_list_item_formato"
+				android:id="@+id/textview_medicamento_list_item_hora"
+				android:layout_marginTop="@dimen/appbar_padding_top"
+				android:layout_marginBottom="@dimen/appbar_padding_top"/>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/textview_medicamento_list_item_usuarioalarma"
 				android:layout_marginTop="@dimen/appbar_padding_top"
 				android:layout_marginBottom="@dimen/appbar_padding_top"/>
 		</LinearLayout>

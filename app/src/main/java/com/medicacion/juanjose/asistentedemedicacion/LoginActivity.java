@@ -6,15 +6,13 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Usuario;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.UsuarioProveedor;
 
@@ -46,8 +44,13 @@ public class LoginActivity extends AppCompatActivity {
                 // Comprobamos si los datos de las casillas de texto son correctos
                 if (validarDatosCasillas()){
 
-                    // Si los datos son válidos comprobamos si existe el usuario
+                    // Si los datos son válidos comprobamos si existe el usuario y si existe accedemos
                     if(comprobarUsuario()){
+
+                        // Almacenamos el nombre de usuario como una constante ya que lo utilizaremos varias veces
+                        // y queremos que sea fijo
+                        G.usuarioalarma = etNameR.getText().toString();
+
                         Intent abrirVentanaMenu = new Intent(context, MenuSelectionActivity.class);
                         startActivity(abrirVentanaMenu);
                     }

@@ -3,7 +3,6 @@ package com.medicacion.juanjose.asistentedemedicacion.medicamento;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -172,7 +171,8 @@ public class MedicamentoListFragment extends ListFragment
 		// currently filtering.
 		String columns[] = new String[] { Contrato.Medicamento._ID,
 										  Contrato.Medicamento.NOMBRE,
-				                          Contrato.Medicamento.HORA
+				                          Contrato.Medicamento.HORA,
+				                          Contrato.Medicamento.usuarioalarma
 										};
 
 		Uri baseUri = Contrato.Medicamento.CONTENT_URI;
@@ -212,13 +212,17 @@ public class MedicamentoListFragment extends ListFragment
 		public void bindView(View view, Context context, Cursor cursor) {
 			int ID = cursor.getInt(cursor.getColumnIndex(Contrato.Medicamento._ID));
 			String nombre = cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.NOMBRE));
-			String formato = cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.HORA));
+			String hora = cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.HORA));
+			String usuarioAlarma = cursor.getString(cursor.getColumnIndex(Contrato.Medicamento.usuarioalarma));
 	
 			TextView textviewNombre = (TextView) view.findViewById(R.id.textview_medicamento_list_item_nombre);
 			textviewNombre.setText(nombre);
 
-			TextView textviewFormato = (TextView) view.findViewById(R.id.textview_medicamento_list_item_formato);
-			textviewFormato.setText(formato);
+			TextView textviewHora = (TextView) view.findViewById(R.id.textview_medicamento_list_item_hora);
+			textviewHora.setText(hora);
+
+			TextView textviewUsuario = (TextView) view.findViewById(R.id.textview_medicamento_list_item_usuarioalarma);
+			textviewUsuario.setText(usuarioAlarma);
 
 			ImageView image = (ImageView) view.findViewById(R.id.image_view);
 
@@ -226,7 +230,7 @@ public class MedicamentoListFragment extends ListFragment
 				Utilidades.loadImageFromStorage(getActivity(), "img_" + ID + ".jpg", image);
 			} catch (FileNotFoundException e) {
 				ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
-				int color = generator.getColor(formato); //Genera un color según el nombre
+				int color = generator.getColor(hora); //Genera un color según el nombre
 				TextDrawable drawable = TextDrawable.builder()
 						.buildRound(nombre.substring(0,1), color);
 				image.setImageDrawable(drawable);

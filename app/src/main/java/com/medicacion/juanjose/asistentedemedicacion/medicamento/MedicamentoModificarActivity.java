@@ -153,19 +153,19 @@ public class MedicamentoModificarActivity extends AppCompatActivity {
         etMedicamentoHora.setError(null);
 
         String nombre = String.valueOf(etMedicamentoNombre.getText());
-        String formato = String.valueOf(etMedicamentoHora.getText());
+        String hora = String.valueOf(etMedicamentoHora.getText());
 
         if (TextUtils.isEmpty(nombre)){
             etMedicamentoNombre.setError(getString(R.string.error_campo_obligatorio));
             etMedicamentoNombre.requestFocus();
         }
 
-        if (TextUtils.isEmpty(formato)){
+        if (TextUtils.isEmpty(hora)){
             etMedicamentoHora.setError(getString(R.string.error_campo_obligatorio));
             etMedicamentoHora.requestFocus();
         }
 
-        Medicamento medicamento = new Medicamento(medID, nombre, formato, foto);
+        Medicamento medicamento = new Medicamento(medID, nombre, hora, foto, G.usuarioalarma);
 
         MedicamentoProveedor.updateRecordConBitacora(getContentResolver(), medicamento, this);
         finish();

@@ -15,15 +15,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.medicacion.juanjose.asistentedemedicacion.R;
 import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
-import com.medicacion.juanjose.asistentedemedicacion.constantes.Utilidades;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
-
-import java.io.IOException;
 
 public class MedicamentoAddActivity extends AppCompatActivity {
 
@@ -148,7 +144,7 @@ public class MedicamentoAddActivity extends AppCompatActivity {
             etMedicamentoHora.requestFocus();
         }
 
-        Medicamento medicamento = new Medicamento(G.SIN_VALOR_INT, nombre, hora, foto);
+        Medicamento medicamento = new Medicamento(G.SIN_VALOR_INT, nombre, hora, foto, G.usuarioalarma);
 
         MedicamentoProveedor.insertRecordConBitacora(getContentResolver(), medicamento, this);
         finish();

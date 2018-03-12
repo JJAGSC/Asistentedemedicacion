@@ -20,4 +20,6 @@ public class G {
     public static final int OPERACION_INSERTAR = 1;
     public static final int OPERACION_MODIFICAR = 2;
     public static final int OPERACION_BORRAR = 3;
+
+    public static String usuarioalarma = "Error";
 }

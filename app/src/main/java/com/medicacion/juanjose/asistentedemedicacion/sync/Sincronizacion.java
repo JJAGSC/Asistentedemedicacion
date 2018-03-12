@@ -33,8 +33,8 @@ public class Sincronizacion {
     public Sincronizacion(Context contexto){
         this.resolvedor = contexto.getContentResolver();
         this.contexto = contexto;
-        recibirActualizacionesDelServidor(); //La primera vez se cargan los datos siempre
-        recibirActualizacionesDelServidorUsuario();
+        //recibirActualizacionesDelServidor(); //La primera vez se cargan los datos siempre
+        //recibirActualizacionesDelServidorUsuario();
     }
 
     public synchronized static boolean isEsperandoRespuestaDeServidor() {
@@ -148,7 +148,7 @@ public class Sincronizacion {
             JSONObject obj = null;
             for (int i = 0; i < jsonArray.length(); i++ ){
                 obj = jsonArray.getJSONObject(i);
-                registrosNuevos.add(new Medicamento(obj.getInt("PK_ID"), obj.getString("nombre"), obj.getString("hora")));
+                registrosNuevos.add(new Medicamento(obj.getInt("PK_ID"), obj.getString("nombre"), obj.getString("hora"), obj.getString("usuarioalarma")));
             }
 
             for(Medicamento medicamento: registrosNuevos) {
