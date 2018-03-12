@@ -1,4 +1,0 @@
-Copiar en el servidor solamente la carpeta Medicamentos, sin la carpeta
-Medicamentos WebService.
-
-Dentro de la carpeta C:\xampp\htdocs\Medicamentos

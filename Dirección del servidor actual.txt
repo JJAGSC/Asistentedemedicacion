@@ -1,0 +1,4 @@
+http://localhost:8080/Medicamentos/webresources/medicamentos
+
+Borrar o editar, añadiendo /id (en id poner el numero de id) 
+al final de la direccion anterior
