@@ -109,8 +109,7 @@
             android:layout_width="214dp"
             android:layout_height="40dp"
             android:hint="@string/nombre"
-            android:inputType="textCapWords"
-            android:text="Antonio" />
+            android:inputType="textCapWords" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -131,8 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:text="1234" />
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <Button

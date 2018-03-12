@@ -35,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         etNameR = (EditText) findViewById(R.id.etName);
         etPassR = (EditText) findViewById(R.id.etPassw);
 
+
+
         // Se comprueba si los datos son correctos antes de hacer el login
         Button btnEnter = (Button) findViewById(R.id.btnEntrar);
         btnEnter.setOnClickListener(new View.OnClickListener(){
