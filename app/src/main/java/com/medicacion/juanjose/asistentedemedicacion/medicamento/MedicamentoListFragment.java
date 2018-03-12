@@ -180,7 +180,9 @@ public class MedicamentoListFragment extends ListFragment
 		// Now create and return a CursorLoader that will take care of
 		// creating a Cursor for the data being displayed.
 
-		String selection = null;
+		// Como selection le pasamos solamente el usuario al que pertenecen las alarmas, para
+        // que así cada usuario tenga sus propias alarmas
+		String selection = "usuarioalarma='"+G.usuarioalarma+"'";
 
 		return new CursorLoader(getActivity(), baseUri,
 				columns, selection, null, null);
