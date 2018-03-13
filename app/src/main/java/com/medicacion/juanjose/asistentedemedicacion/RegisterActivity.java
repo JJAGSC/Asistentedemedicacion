@@ -1,5 +1,7 @@
 package com.medicacion.juanjose.asistentedemedicacion;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -57,6 +59,15 @@ public class RegisterActivity extends AppCompatActivity {
                 if (validarCampos()) {
 
                     crearUsuario();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }, 1400);
 
                 } else {
 
@@ -130,6 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
             // Si no existe el usuario, lo guardamos en la base de datos local
             usuario.setID(G.SIN_VALOR_INT);
             UsuarioProveedor.insertRecordConBitacora(getContentResolver(), usuario, getApplicationContext());
+
 
             Toast.makeText(getApplicationContext(), "¡Usuario "+nombreUsuario+" creado con éxito!", Toast.LENGTH_SHORT).show();
 

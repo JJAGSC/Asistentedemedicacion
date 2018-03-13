@@ -3,6 +3,8 @@ package com.medicacion.juanjose.asistentedemedicacion.medicamento;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -219,12 +221,18 @@ public class MedicamentoListFragment extends ListFragment
 	
 			TextView textviewNombre = (TextView) view.findViewById(R.id.textview_medicamento_list_item_nombre);
 			textviewNombre.setText(nombre);
+			textviewNombre.setTextColor(Color.parseColor("#088A4B"));
+			textviewNombre.setTypeface(null, Typeface.BOLD);
 
 			TextView textviewHora = (TextView) view.findViewById(R.id.textview_medicamento_list_item_hora);
 			textviewHora.setText(hora);
+            textviewHora.setTextColor(Color.parseColor("#FF8000"));
+            textviewHora.setTypeface(null, Typeface.BOLD);
 
 			TextView textviewUsuario = (TextView) view.findViewById(R.id.textview_medicamento_list_item_usuarioalarma);
 			textviewUsuario.setText(usuarioAlarma);
+            textviewUsuario.setTextColor(Color.parseColor("#0101DF"));
+            textviewUsuario.setTypeface(null, Typeface.BOLD);
 
 			ImageView image = (ImageView) view.findViewById(R.id.image_view);
 
@@ -234,7 +242,7 @@ public class MedicamentoListFragment extends ListFragment
 				ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
 				int color = generator.getColor(hora); //Genera un color según el nombre
 				TextDrawable drawable = TextDrawable.builder()
-						.buildRound(nombre.substring(0,1), color);
+						.buildRound(nombre.substring(0,2), color);
 				image.setImageDrawable(drawable);
 			}
 

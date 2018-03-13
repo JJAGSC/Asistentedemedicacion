@@ -33,7 +33,9 @@ public class Sincronizacion {
     public Sincronizacion(Context contexto){
         this.resolvedor = contexto.getContentResolver();
         this.contexto = contexto;
-        //recibirActualizacionesDelServidor(); //La primera vez se cargan los datos siempre
+
+        //La primera vez se cargan los datos siempre
+        //recibirActualizacionesDelServidor();
         //recibirActualizacionesDelServidorUsuario();
     }
 
@@ -52,6 +54,7 @@ public class Sincronizacion {
             return true;
         }
 
+
         if(G.VERSION_ADMINISTRADOR){
             enviarActualizacionesAlServidor();
             enviarActualizacionesAlServidorUsuario();
@@ -59,6 +62,7 @@ public class Sincronizacion {
             recibirActualizacionesDelServidorUsuario();
         } else {
             recibirActualizacionesDelServidor();
+            recibirActualizacionesDelServidorUsuario();
         }
 
         return true;
@@ -175,8 +179,6 @@ public class Sincronizacion {
                     }
                 }
             }
-
-
 
             //MedicamentoVolley.getAllMedicamento(); //Los baja y los guarda en SQLite
         } catch (Exception e) {

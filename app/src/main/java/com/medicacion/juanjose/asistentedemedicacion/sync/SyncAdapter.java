@@ -8,6 +8,7 @@ import android.content.SyncResult;
 import android.os.Bundle;
 
 import com.medicacion.juanjose.asistentedemedicacion.aplicacion.AppController;
+import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
 
 /**
  * Handle the transfer of data between a server and an

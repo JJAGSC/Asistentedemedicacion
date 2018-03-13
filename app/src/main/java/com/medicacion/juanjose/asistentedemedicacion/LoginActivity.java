@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.medicacion.juanjose.asistentedemedicacion.constantes.G;
 import com.medicacion.juanjose.asistentedemedicacion.pojos.Usuario;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.UsuarioProveedor;
+import com.medicacion.juanjose.asistentedemedicacion.sync.Sincronizacion;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         etNameR = (EditText) findViewById(R.id.etName);
         etPassR = (EditText) findViewById(R.id.etPassw);
 
-
+        Sincronizacion.setEsperandoRespuestaDeServidor(true);
 
         // Se comprueba si los datos son correctos antes de hacer el login
         Button btnEnter = (Button) findViewById(R.id.btnEntrar);

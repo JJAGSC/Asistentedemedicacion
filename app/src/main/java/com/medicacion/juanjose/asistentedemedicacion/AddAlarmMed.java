@@ -5,6 +5,8 @@ import com.medicacion.juanjose.asistentedemedicacion.pojos.Medicamento;
 import com.medicacion.juanjose.asistentedemedicacion.proveedor.MedicamentoProveedor;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -139,6 +141,15 @@ public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.O
                 validar();
 
                 attemptGuardarAlarmasBaseDatos();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(getApplicationContext(), MenuSelectionActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }, 1400);
             }
         });
     }
@@ -219,7 +230,6 @@ public class AddAlarmMed extends AppCompatActivity implements TimePickerDialog.O
             medicamento.setID(G.SIN_VALOR_INT);
             MedicamentoProveedor.insertRecordConBitacora(getContentResolver(), medicamento, this);
         }
-
 
         //MedicamentoProveedor.insertRecordConBitacora(getContentResolver(), medicamento, this);
         //finish();

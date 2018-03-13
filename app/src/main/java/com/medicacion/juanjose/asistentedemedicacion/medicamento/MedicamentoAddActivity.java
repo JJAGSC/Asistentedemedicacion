@@ -147,6 +147,7 @@ public class MedicamentoAddActivity extends AppCompatActivity {
         Medicamento medicamento = new Medicamento(G.SIN_VALOR_INT, nombre, hora, foto, G.usuarioalarma);
 
         MedicamentoProveedor.insertRecordConBitacora(getContentResolver(), medicamento, this);
+
         finish();
     }
 }
