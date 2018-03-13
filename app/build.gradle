@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -43,4 +46,7 @@ dependencies {
 
     // Librerias para los datetimepicker
     compile 'com.github.wdullaer:MaterialDateTimePicker:v3.0.0'
+
+    // Librerias mockito para tests
+    testCompile 'org.mockito:mockito-all:1.10.19'
 }

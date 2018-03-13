@@ -25,6 +25,9 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etNameReg;
     EditText etPassReg;
     EditText etPassRegRep;
+    String userName;
+    String userPassReg;
+    String userPassRegRep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,29 +37,22 @@ public class RegisterActivity extends AppCompatActivity {
         etNameReg = (EditText) findViewById(R.id.etNameReg);
         etPassReg = (EditText) findViewById(R.id.etPassReg);
         etPassRegRep = (EditText) findViewById(R.id.etPassRegRep);
+        etNameReg.setError(null);
+        etPassReg.setError(null);
+        etPassRegRep.setError(null);
 
         Button registrarUsuario = (Button) findViewById(R.id.btnRegisterUser);
-
-        // Código para hacer pruebas y ver cuantos usuarios hay
-        /*ArrayList<Usuario> listaUsuariosGuardados;
-        listaUsuariosGuardados = UsuarioProveedor.readAllRecord(getContentResolver());
-
-        if (listaUsuariosGuardados.size() > 0) {
-
-            for (int i = 0; i < listaUsuariosGuardados.size(); i++) {
-
-                String nombreUsuario = listaUsuariosGuardados.get(i).getNombre();
-                String passwordUsuario = listaUsuariosGuardados.get(i).getPassword();
-
-                Toast.makeText(getApplicationContext(), nombreUsuario+" "+passwordUsuario, Toast.LENGTH_SHORT).show();
-            }
-        }*/
 
         registrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (validarCampos()) {
+                userName = etNameReg.getText().toString();
+                userPassReg = etPassReg.getText().toString();
+                userPassRegRep = etPassRegRep.getText().toString();
+
+
+                if (validarCampos(userName, userPassReg, userPassRegRep)) {
 
                     crearUsuario();
 
@@ -71,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 } else {
 
+
                     Toast.makeText(getApplicationContext(), "Error al intentar crear el usuario. Datos incorrectos", Toast.LENGTH_LONG).show();
                 }
 
@@ -78,17 +75,9 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private boolean validarCampos() {
+    protected boolean validarCampos(String userName, String userPassReg, String userPassRegRep) {
 
         boolean datosCorrectos = true;
-
-        etNameReg.setError(null);
-        etPassReg.setError(null);
-        etPassRegRep.setError(null);
-
-        String userName = etNameReg.getText().toString();
-        String userPassReg = etPassReg.getText().toString();
-        String userPassRegRep = etPassRegRep.getText().toString();
 
         // Comprobamos que los campos no estén vacíos
         if (TextUtils.isEmpty(userName)) {
@@ -134,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
         String nombreUsuario = etNameReg.getText().toString();
 
         // Comprobamos si el usuario existe en la base de datos
-        if (!comprobarSiExisteUsuario()){
+        if (!comprobarSiExisteUsuario()) {
 
             Usuario usuario = new Usuario(etNameReg.getText().toString(), etPassReg.getText().toString());
 
@@ -143,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
             UsuarioProveedor.insertRecordConBitacora(getContentResolver(), usuario, getApplicationContext());
 
 
-            Toast.makeText(getApplicationContext(), "¡Usuario "+nombreUsuario+" creado con éxito!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "¡Usuario " + nombreUsuario + " creado con éxito!", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(getApplicationContext(), "No se ha podido crear. Ya existe un usuario con ese nombre.", Toast.LENGTH_SHORT).show();
@@ -166,7 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
                 nombreUsuarioRecibido = listaUsuariosGuardados.get(i).getNombre();
 
                 // Comprobamos si ya existe el usuario en la base de datos
-                if (nombreUsuarioRecibido.equalsIgnoreCase(userNameIntroducido)){
+                if (nombreUsuarioRecibido.equalsIgnoreCase(userNameIntroducido)) {
                     return true;
                 }
             }
