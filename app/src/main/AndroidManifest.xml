@@ -60,7 +60,8 @@
             android:name=".BDMeds"
             android:label="@string/title_activity_bdmeds"
             android:parentActivityName=".MenuSelectionActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
@@ -69,6 +70,7 @@
             android:name=".medicamento.MedicamentoActivity"
             android:label="Alarmas guardadas"
             android:parentActivityName=".MenuSelectionActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -77,6 +79,7 @@
         <activity
             android:name=".medicamento.MedicamentoAddActivity"
             android:parentActivityName=".medicamento.MedicamentoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -85,7 +88,26 @@
         <activity
             android:name=".medicamento.MedicamentoModificarActivity"
             android:parentActivityName=".medicamento.MedicamentoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuSelectionActivity" />
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Registrar Usuario"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity" />
+        </activity>
+        <activity
+            android:name=".AddAlarmMed"
+            android:label="Crear alarmas"
+            android:parentActivityName=".MenuSelectionActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuSelectionActivity" />
@@ -128,26 +150,6 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
-
-        <activity
-            android:name=".RegisterActivity"
-            android:label="Registrar Usuario"
-            android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginActivity" />
-        </activity>
-        <activity
-            android:name=".AddAlarmMed"
-            android:label="Crear alarmas"
-            android:parentActivityName=".MenuSelectionActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuSelectionActivity" />
-        </activity>
-
         <receiver
             android:name=".MyAlarm"
             android:enabled="true"

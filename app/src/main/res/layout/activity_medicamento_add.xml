@@ -35,24 +35,24 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp">
 
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/etMedicamentoNombre"
+            android:layout_width="311dp"
             android:layout_height="wrap_content"
-            android:hint="@string/medicamento_nombre"
-            android:id="@+id/etMedicamentoNombre"/>
+            android:hint="@string/medicamento_nombre" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="314dp"
         android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/etMedicamentoHora"
-            android:layout_width="match_parent"
+            android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:hint="Hora" />
     </android.support.design.widget.TextInputLayout>

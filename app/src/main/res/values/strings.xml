@@ -29,7 +29,7 @@
     <string name="sin_datos">Sin datos.</string>
     <string name="progress_cargando_datos">Cargando datos&#8230;</string>
 
-    <string name="medicamento_nombre">Nombre</string>
+    <string name="medicamento_nombre">Nombre del medicamento</string>
     <string name="medicamento_formato">Formato</string>
     <string name="title_activity_manage_pictures">Gestionar Fotos</string>
     <string name="title_activity_clinics_map">Clínicas cercanas</string>
